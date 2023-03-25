@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class PlayerCam : MonoBehaviour
 {
     public float sensX;
     public float sensY;
@@ -28,7 +28,8 @@ public class NewBehaviourScript : MonoBehaviour
 
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-        transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
-        orientation.rotation = Quaternion.Euler(0, yRotation, 0);
+
+        transform.rotation = UnityEngine.Quaternion.Euler(xRotation, yRotation, 0);
+        orientation.rotation = UnityEngine.Quaternion.Euler(0, yRotation, 0);
     }
 }
