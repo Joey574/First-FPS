@@ -19,6 +19,8 @@ public class GunController : MonoBehaviour
     public int ammo = 12;
     public float ejectVelocity;
     public float recoil;
+    public float horizontalSway;
+    public float verticalSway;
     public float volume;
     
     public GameObject bulletPrefab;
