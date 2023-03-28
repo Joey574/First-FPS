@@ -49,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
             rb.drag = groundDrag;
         } else
         {
-            rb.drag = 0;
+            rb.drag = 0.05f;
         }
     }
 

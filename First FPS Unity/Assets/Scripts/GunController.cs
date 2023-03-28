@@ -12,7 +12,13 @@ public class GunController : MonoBehaviour
 
     [Header("Gun Data")]
     public float fireRate;
-    public int bulletSpeed;
+    public float bulletSpeed;
+    public float ejectVelocity;
+
+    public GameObject bulletPrefab;
+    public GameObject casingPrefab;
+    public Transform spawnPoint;
+    public Transform casingSpawn;
 
 
     private void Update()
@@ -29,7 +35,10 @@ public class GunController : MonoBehaviour
 
     private void spawnBullet()
     {
-
+        var bullet = Instantiate(bulletPrefab, spawnPoint.position, spawnPoint.rotation);
+        bullet.GetComponent<Rigidbody>().velocity = spawnPoint.forward * bulletSpeed;
+        var casing = Instantiate(casingPrefab, casingSpawn.position, casingSpawn.rotation);
+        casing.GetComponent<Rigidbody>().velocity = casingSpawn.right * ejectVelocity;
     }
 
     private void resetShoot()
