@@ -11,7 +11,6 @@ public class GunController : MonoBehaviour
 
     private bool readyToShoot = true;
     private bool auto = true;
-    private bool fireSemi;
 
     [Header("Gun Data")]
     public float fireRate;
@@ -31,9 +30,9 @@ public class GunController : MonoBehaviour
             auto = !auto;
         }
 
-        if (Input.GetKeyUp(shoot) && !auto)
+        if (Input.GetKeyUp(shoot))
         {
-            fireSemi = true;
+            resetShoot();
         }
 
         if (Input.GetKey(shoot) && readyToShoot && auto)
@@ -43,9 +42,9 @@ public class GunController : MonoBehaviour
             spawnBullet();
 
             Invoke(nameof(resetShoot), (60f / fireRate));
-        } else if (Input.GetKey(shoot) && fireSemi && !auto) {
+        } else if (Input.GetKey(shoot) && readyToShoot && !auto) {
             spawnBullet();
-            fireSemi = false;
+            readyToShoot = false;
         }
     }
 
