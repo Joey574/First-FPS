@@ -7,8 +7,11 @@ public class GunController : MonoBehaviour
     [Header("Keybinds")]
     public KeyCode shoot = KeyCode.Mouse0;
     public KeyCode aim = KeyCode.Mouse1;
+    public KeyCode toggleFire = KeyCode.V;
 
     private bool readyToShoot = true;
+    private bool auto = true;
+    private bool fireSemi;
 
     [Header("Gun Data")]
     public float fireRate;
@@ -23,13 +26,26 @@ public class GunController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(shoot) && readyToShoot)
+        if (Input.GetKeyDown(toggleFire))
+        {
+            auto = !auto;
+        }
+
+        if (Input.GetKeyUp(shoot) && !auto)
+        {
+            fireSemi = true;
+        }
+
+        if (Input.GetKey(shoot) && readyToShoot && auto)
         {
             readyToShoot = false;
 
             spawnBullet();
 
             Invoke(nameof(resetShoot), (60f / fireRate));
+        } else if (Input.GetKey(shoot) && fireSemi && !auto) {
+            spawnBullet();
+            fireSemi = false;
         }
     }
 
