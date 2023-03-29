@@ -39,6 +39,7 @@ public class GunController : MonoBehaviour
     public float lowerRand;
     public float upperRand;
 
+    [Header("Objects")]
     public GameObject gun;
     public GameObject bulletPrefab;
     public GameObject casingPrefab;
