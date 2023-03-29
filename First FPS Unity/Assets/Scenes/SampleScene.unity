@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -560,12 +560,21 @@ MonoBehaviour:
   verticalSway: 0
   horizontalSway: 0
   reloadTime: 1.5
+  chargeOpenTime: 0.08
   canAuto: 0
   volume: 0
+  hasScope: 1
+  zoomMult: 1.5
+  reloadZoom: 3
+  defaultFOV: 60
+  horizontalAimAdjust: 0
+  verticalAimAdjust: 0.05
+  lowerRand: 5
+  upperRand: 10
   gun: {fileID: 1319709789}
-  camera: {fileID: 963194225}
   bulletPrefab: {fileID: 9086502398145737196, guid: 2b3145c80a9ea984490af420f478a4cb, type: 3}
   casingPrefab: {fileID: 6607513805091876755, guid: 5a9825458a6460e40bf0073c80c68f61, type: 3}
+  hand: {fileID: 959421897}
   bulletSpawn: {fileID: 1357856510}
   casingSpawn: {fileID: 2070621163}
 --- !u!1 &601714327
@@ -857,7 +866,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 959421896}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.45, y: -0.20000005, z: 0.6}
+  m_LocalPosition: {x: 0.45, y: -0.20000005, z: 0.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -995,7 +1004,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 976039157}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.45, y: -0.20000005, z: 0.6}
+  m_LocalPosition: {x: -0.45, y: -0.20000005, z: 0.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1150,6 +1159,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -2717041945756256765, guid: 12c29ccd56816914e8901fe3638dcd0d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 174132719366143ac85976f70995ae90, type: 2}
+    - target: {fileID: -1967758284531576944, guid: 12c29ccd56816914e8901fe3638dcd0d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 174132719366143ac85976f70995ae90, type: 2}
     - target: {fileID: 919132149155446097, guid: 12c29ccd56816914e8901fe3638dcd0d, type: 3}
       propertyPath: m_Name
       value: BarettaM9
@@ -1182,6 +1199,20 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!136 &1319709791
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1319709789}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.028664604
+  m_Height: 0.5984171
+  m_Direction: 2
+  m_Center: {x: 0.000961259, y: 0, z: -0.0020198524}
 --- !u!1 &1357856509
 GameObject:
   m_ObjectHideFlags: 0
@@ -1394,7 +1425,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 64d122f658ad64110bff23c86c97d409, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

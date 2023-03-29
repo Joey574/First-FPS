@@ -10,9 +10,11 @@ public class GunController : MonoBehaviour
     public KeyCode toggleFire = KeyCode.V;
     public KeyCode reload = KeyCode.R;
 
+    private UnityEngine.Vector3 defaultPos;
     private bool readyToShoot = true;
     private bool reloading = false;
     private bool auto = true;
+    private bool aiming = false;
 
     [Header("Gun Data")]
     public float fireRate;
@@ -25,23 +27,35 @@ public class GunController : MonoBehaviour
     public float verticalSway;
     public float horizontalSway;
     public float reloadTime;
+    public float chargeOpenTime;
     public bool canAuto;
     public float volume;
+    public bool hasScope;
+    public float zoomMult;
+    public float reloadZoom;
+    public float defaultFOV;
+    public float horizontalAimAdjust;
+    public float verticalAimAdjust;
+    public float lowerRand;
+    public float upperRand;
 
     public GameObject gun;
-    public GameObject camera;
     public GameObject bulletPrefab;
     public GameObject casingPrefab;
+    public Transform hand;
     public Transform bulletSpawn;
     public Transform casingSpawn;
 
-    private PlayerCam cameraRecoil;
+    private GameObject camera;
+    private PlayerCam cameraScript;
     private Animation anim;
 
     private void Awake()
     {
-        cameraRecoil = camera.GetComponent <PlayerCam> ();
+        camera = GameObject.Find("PlayerCam");
+        cameraScript = camera.GetComponent <PlayerCam> ();
         anim = gun.GetComponent<Animation>();
+        defaultPos = hand.localPosition;
     }
 
     private void Update()
@@ -57,8 +71,32 @@ public class GunController : MonoBehaviour
             startReload();
         }
 
+        if (Input.GetKey(aim))
+        {
+            aiming = true;
+
+            if (!reloading)
+            {
+                hand.localPosition = new UnityEngine.Vector3(0 - horizontalAimAdjust, 0 - verticalAimAdjust, defaultPos.z);
+                if (hasScope)
+                {
+                    cameraScript.setFOV(defaultFOV / zoomMult);
+                }
+            } else
+            {
+                cameraScript.setFOV(defaultFOV / reloadZoom);
+            }
+
+        }
+
+        if (Input.GetKeyUp(aim))
+        {
+            resetAim();
+        }
+
         if (!reloading)
         {
+            aiming = false;
             if (canAuto && auto)
             {
                 if (Input.GetKey(shoot) && readyToShoot && auto)
@@ -92,10 +130,14 @@ public class GunController : MonoBehaviour
             var bullet = Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
             bullet.GetComponent<Rigidbody>().velocity = bulletSpawn.forward * bulletSpeed;
             anim.Play("kickBack");
+            if (ammo == 0)
+            {
+                Invoke(nameof(pauseSlideAction), chargeOpenTime);
+            }
 
-            cameraRecoil.addRecoil(verticalRecoil, horizontalRecoil);
+            cameraScript.addRecoil(verticalRecoil, horizontalRecoil);
 
-            Invoke(nameof(spawnCasing), 0.08f);
+            Invoke(nameof(spawnCasing), chargeOpenTime);
         } else {
             
         }
@@ -103,8 +145,10 @@ public class GunController : MonoBehaviour
 
     private void spawnCasing()
     {
+        float random = Random.Range(lowerRand, upperRand);   
         var casing = Instantiate(casingPrefab, casingSpawn.position, casingSpawn.rotation);
         casing.GetComponent<Rigidbody>().velocity = casingSpawn.up * ejectVelocity;
+        casing.GetComponent<Rigidbody>().AddTorque(new Vector3(random, random, 0));
     }
 
     private void resetShoot()
@@ -115,12 +159,29 @@ public class GunController : MonoBehaviour
     private void startReload()
     {
         Invoke(nameof(setAmmoToMax), reloadTime);
+
     }
 
     private void setAmmoToMax()
     {
+        if (ammo == 0)
+        {
+            anim
+        }
         ammo = maxAmmo;
         reloading = false;
+    }
+
+    private void pauseSlideAction()
+    {
+        anim.Stop("kickBack");
+    }
+
+    private void resetAim()
+    {
+        aiming = false;
+        cameraScript.setFOV(defaultFOV);
+        hand.localPosition = defaultPos;
     }
 
     private IEnumerator WaitForAnimation(Animation animation)

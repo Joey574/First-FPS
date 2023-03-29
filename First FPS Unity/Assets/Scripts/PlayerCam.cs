@@ -47,4 +47,14 @@ public class PlayerCam : MonoBehaviour
         verticalRecoil += v;
         horizontalRecoil += h;
     }
+
+    public UnityEngine.Vector3 getPos()
+    {
+        return transform.position;
+    }
+
+    public void setFOV (float f)
+    {
+        Camera.main.fieldOfView = f;
+    }
 }
