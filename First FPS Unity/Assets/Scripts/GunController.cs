@@ -38,6 +38,7 @@ public class GunController : MonoBehaviour
     public float verticalAimAdjust;
     public float lowerRand;
     public float upperRand;
+    public float pauseSlideAdjust;
 
     [Header("Objects")]
     public GameObject gun;
@@ -133,7 +134,7 @@ public class GunController : MonoBehaviour
             anim.Play("kickBack");
             if (ammo == 0)
             {
-                Invoke(nameof(pauseSlideAction), chargeOpenTime);
+                Invoke(nameof(pauseSlideAction), chargeOpenTime + pauseSlideAdjust);
             }
 
             cameraScript.addRecoil(verticalRecoil, horizontalRecoil);
@@ -167,10 +168,10 @@ public class GunController : MonoBehaviour
     {
         if (ammo == 0)
         {
-            anim
+            anim.Play("closeAction");
         }
         ammo = maxAmmo;
-        reloading = false;
+        StartCoroutine(WaitForReloadAnimation(anim));
     }
 
     private void pauseSlideAction()
@@ -192,5 +193,14 @@ public class GunController : MonoBehaviour
             yield return null;
         }
         readyToShoot = true;
+    }
+
+    private IEnumerator WaitForReloadAnimation(Animation animaton)
+    {
+        while (animaton.isPlaying)
+        {
+            yield return null;
+        }
+        reloading = false;
     }
 }
