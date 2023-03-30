@@ -14,7 +14,6 @@ public class GunController : MonoBehaviour
     private bool readyToShoot = true;
     private bool reloading = false;
     private bool auto = true;
-    private bool aiming = false;
 
     [Header("Gun Data")]
     public float fireRate;
@@ -75,20 +74,7 @@ public class GunController : MonoBehaviour
 
         if (Input.GetKey(aim))
         {
-            aiming = true;
-
-            if (!reloading)
-            {
-                hand.localPosition = new UnityEngine.Vector3(0 - horizontalAimAdjust, 0 - verticalAimAdjust, defaultPos.z);
-                if (hasScope)
-                {
-                    cameraScript.setFOV(defaultFOV / zoomMult);
-                }
-            } else
-            {
-                cameraScript.setFOV(defaultFOV / reloadZoom);
-            }
-
+           aimHandler();
         }
 
         if (Input.GetKeyUp(aim))
@@ -96,9 +82,30 @@ public class GunController : MonoBehaviour
             resetAim();
         }
 
+        fireHandler();
+       
+    }
+    
+    private void aimHandler()
+    {
+         if (!reloading)
+            {
+                hand.localPosition = new UnityEngine.Vector3(0 - horizontalAimAdjust, 0 - verticalAimAdjust, defaultPos.z);
+                if (hasScope)
+                {
+                    cameraScript.setFOV(defaultFOV / zoomMult);
+                }
+            } 
+            else
+            {
+                cameraScript.setFOV(defaultFOV / reloadZoom);
+            }
+    }
+
+    private void fireHandler()
+    {
         if (!reloading)
         {
-            aiming = false;
             if (canAuto && auto)
             {
                 if (Input.GetKey(shoot) && readyToShoot && auto)
@@ -115,7 +122,6 @@ public class GunController : MonoBehaviour
                 {
                     resetShoot();
                 }
-
                 else if (Input.GetKey(shoot) && readyToShoot)
                 {
                     spawnBullet();
@@ -155,7 +161,7 @@ public class GunController : MonoBehaviour
 
     private void resetShoot()
     {
-        StartCoroutine(WaitForAnimation(anim));
+        StartCoroutine(WaitForKickBackAnimation(anim));
     }
 
     private void startReload()
@@ -181,12 +187,11 @@ public class GunController : MonoBehaviour
 
     private void resetAim()
     {
-        aiming = false;
         cameraScript.setFOV(defaultFOV);
         hand.localPosition = defaultPos;
     }
 
-    private IEnumerator WaitForAnimation(Animation animation)
+    private IEnumerator WaitForKickBackAnimation(Animation animation)
     {
         while(animation.isPlaying)
         {
