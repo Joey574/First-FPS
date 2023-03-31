@@ -14,6 +14,7 @@ public class GunController : MonoBehaviour
     private bool readyToShoot = true;
     private bool reloading = false;
     private bool auto = true;
+    private bool aiming = false;
 
     [Header("Gun Data")]
     public float fireRate;
@@ -26,18 +27,12 @@ public class GunController : MonoBehaviour
     public float verticalSway;
     public float horizontalSway;
     public float reloadTime;
-    public float chargeOpenTime;
-    public bool canAuto;
     public float volume;
-    public bool hasScope;
     public float zoomMult;
     public float reloadZoom;
-    public float defaultFOV;
-    public float horizontalAimAdjust;
-    public float verticalAimAdjust;
-    public float lowerRand;
-    public float upperRand;
-    public float pauseSlideAdjust;
+    public bool hasScope;
+    public bool canAuto;
+    public bool aimToggle;    
 
     [Header("Objects")]
     public GameObject gun;
@@ -46,6 +41,15 @@ public class GunController : MonoBehaviour
     public Transform hand;
     public Transform bulletSpawn;
     public Transform casingSpawn;
+    
+    [Header("Adjustments")]
+    public float defaultFOV;
+    public float chargeOpenTime;
+    public float horizontalAimAdjust;
+    public float verticalAimAdjust;
+    public float lowerRand;
+    public float upperRand;
+    public float pauseSlideAdjust;
 
     private GameObject camera;
     private PlayerCam cameraScript;
@@ -70,17 +74,34 @@ public class GunController : MonoBehaviour
         {
             startReload();
         }
-
-        if (Input.GetKey(aim))
+        
+        if (aimToggle)
         {
-           aimHandler();
+            if (Input.GetKeyDown(aim) && !aiming)
+            {
+                aiming = true;
+                aimHandler();
+            }
+            
+            if (Input.GetKeyDown(aim) && aiming)
+            {
+                aiming = false;
+                aimHandler();
+            }
         }
-
-        if (Input.GetKeyUp(aim))
+        else
         {
-            resetAim();
-        }
-
+             if (Input.GetKey(aim))
+            {
+                aimHandler();
+            }
+            
+            if (Input.GetKeyUp(aim))
+            {
+                resetAim();
+            }
+        } 
+        
         fireHandler();
        
     }
