@@ -68,7 +68,6 @@ public class GunController : MonoBehaviour
 
         if (Input.GetKeyDown(reload))
         {
-            reloading = true;
             startReload();
         }
 
@@ -166,8 +165,8 @@ public class GunController : MonoBehaviour
 
     private void startReload()
     {
+        reloading = true;
         Invoke(nameof(setAmmoToMax), reloadTime);
-
     }
 
     private void setAmmoToMax()
