@@ -29,7 +29,6 @@ public class GunController : MonoBehaviour
     public float reloadTime;
     public float volume;
     public float zoomMult;
-    public float reloadZoom;
     public bool hasScope;
     public bool canAuto;
     public bool aimToggle;    
@@ -44,6 +43,7 @@ public class GunController : MonoBehaviour
     
     [Header("Adjustments")]
     public float defaultFOV;
+    public float reloadZoom = 5.0f;
     public float chargeOpenTime;
     public float horizontalAimAdjust;
     public float verticalAimAdjust;
