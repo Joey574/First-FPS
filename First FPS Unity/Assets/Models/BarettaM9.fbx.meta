@@ -36,7 +36,7 @@ ModelImporter:
       name: kickBack
       takeName: Slide|SlideAction.001
       internalID: -4635461154429966472
-      firstFrame: 2
+      firstFrame: 0
       lastFrame: 6
       wrapMode: 0
       orientationOffsetY: 0
@@ -65,7 +65,7 @@ ModelImporter:
       name: closeAction
       takeName: Slide|SlideAction.001
       internalID: 1895044741094666348
-      firstFrame: 2.1
+      firstFrame: 2.2
       lastFrame: 6
       wrapMode: 0
       orientationOffsetY: 0
