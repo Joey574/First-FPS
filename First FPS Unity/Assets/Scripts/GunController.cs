@@ -49,7 +49,6 @@ public class GunController : MonoBehaviour
     public float verticalAimAdjust;
     public float lowerRand;
     public float upperRand;
-    public float pauseSlideAdjust;
 
     private GameObject camera;
     private PlayerCam cameraScript;
@@ -102,7 +101,14 @@ public class GunController : MonoBehaviour
             }
         } 
         
-        fireHandler();
+        if (!reloading)
+        {
+            fireHandler();
+        } 
+        else if (reloading && Input.GetKey(shoot)) // when reload anim added, swith to coroutine to wait before setting ammo, then stop coroutine
+        {
+        
+        }
        
     }
     
@@ -124,29 +130,26 @@ public class GunController : MonoBehaviour
 
     private void fireHandler()
     {
-        if (!reloading)
+        if (canAuto && auto)
         {
-            if (canAuto && auto)
+            if (Input.GetKey(shoot) && readyToShoot && auto)
             {
-                if (Input.GetKey(shoot) && readyToShoot && auto)
-                {
-                    readyToShoot = false;
-                    spawnBullet();
-                    Invoke(nameof(resetShoot), (60f / fireRate));
-
-                }
+                readyToShoot = false;
+                spawnBullet();
+                Invoke(nameof(resetShoot), (60f / fireRate));
             }
-            else
+        }
+        else
+        {
+            if (Input.GetKeyUp(shoot))
             {
-                if (Input.GetKeyUp(shoot))
-                {
-                    resetShoot();
-                }
-                else if (Input.GetKey(shoot) && readyToShoot)
-                {
-                    spawnBullet();
-                    readyToShoot = false;
-                }
+                resetShoot();
+            }
+            
+            if (Input.GetKeyDown(shoot) && readyToShoot)
+            {
+                spawnBullet();
+                readyToShoot = false;
             }
         }
     }
@@ -160,13 +163,15 @@ public class GunController : MonoBehaviour
             anim.Play("kickBack");
             if (ammo == 0)
             {
-                Invoke(nameof(pauseSlideAction), chargeOpenTime + pauseSlideAdjust);
+                Invoke(nameof(pauseSlideAction), chargeOpenTime);
             }
 
             cameraScript.addRecoil(verticalRecoil, horizontalRecoil);
 
             Invoke(nameof(spawnCasing), chargeOpenTime);
-        } else {
+        } 
+        else // play click sound 
+        {
             
         }
     }
