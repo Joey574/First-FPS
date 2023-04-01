@@ -33,35 +33,45 @@ public class GunController : MonoBehaviour
     public float zoomMult;
     public bool hasScope;
     public bool canAuto;
-    public bool aimToggle;    
+    public bool aimToggle;
+    public bool left = false;
 
     [Header("Objects")]
     public GameObject gun;
     public GameObject bulletPrefab;
     public GameObject casingPrefab;
-    public Transform hand;
     public Transform bulletSpawn;
     public Transform casingSpawn;
-    
+
     [Header("Adjustments")]
     public float defaultFOV;
     public float reloadZoom = 5.0f;
     public float chargeOpenTime;
     public float horizontalAimAdjust;
     public float verticalAimAdjust;
+    public float zAimAdjust;
     public float lowerRand;
     public float upperRand;
 
+    private GameObject hand;
     private GameObject camera;
     private PlayerCam cameraScript;
     private Animation anim;
 
     private void Awake()
     {
+        if (left)
+        {
+            hand = GameObject.Find("LeftHand");
+        }
+        else
+        {
+            hand = GameObject.Find("RightHand");
+        }
         camera = GameObject.Find("PlayerCam");
         cameraScript = camera.GetComponent <PlayerCam> ();
         anim = gun.GetComponent<Animation>();
-        defaultPos = hand.localPosition;
+        defaultPos = hand.transform.localPosition;
     }
 
     private void Update()
@@ -87,18 +97,20 @@ public class GunController : MonoBehaviour
             if (Input.GetKeyDown(aim) && aiming)
             {
                 aiming = false;
-                aimHandler();
+                resetAim(); 
             }
         }
         else
         {
              if (Input.GetKey(aim))
             {
+                aiming = true;
                 aimHandler();
             }
             
             if (Input.GetKeyUp(aim))
             {
+                aiming = false;
                 resetAim();
             }
         } 
@@ -118,7 +130,7 @@ public class GunController : MonoBehaviour
     {
          if (!reloading)
             {
-                hand.localPosition = new UnityEngine.Vector3(0 - horizontalAimAdjust, 0 - verticalAimAdjust, defaultPos.z);
+                hand.transform.localPosition = new UnityEngine.Vector3(0 - horizontalAimAdjust, 0 - verticalAimAdjust, defaultPos.z - zAimAdjust);
                 if (hasScope)
                 {
                     cameraScript.setFOV(defaultFOV / zoomMult);
@@ -194,6 +206,7 @@ public class GunController : MonoBehaviour
     private void startReload()
     {
         reloading = true;
+        hand.transform.localPosition = defaultPos;
         Invoke(nameof(setAmmoToMax), reloadTime);
     }
 
@@ -215,7 +228,7 @@ public class GunController : MonoBehaviour
     private void resetAim()
     {
         cameraScript.setFOV(defaultFOV);
-        hand.localPosition = defaultPos;
+        hand.transform.localPosition = defaultPos;
     }
 
     private IEnumerator WaitForKickBackAnimation(Animation animation)
@@ -234,5 +247,14 @@ public class GunController : MonoBehaviour
             yield return null;
         }
         reloading = false;
+
+        if (!aiming)
+        {
+            cameraScript.setFOV(defaultFOV);
+        }
+        else
+        {
+            aimHandler();
+        }
     }
 }

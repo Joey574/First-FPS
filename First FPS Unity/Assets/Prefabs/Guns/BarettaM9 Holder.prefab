@@ -1,0 +1,252 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8003693850151283381
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8003693850151283382}
+  - component: {fileID: 8003693850151283383}
+  m_Layer: 0
+  m_Name: BarettaM9 Holder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8003693850151283382
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8003693850151283381}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7536893116677964160}
+  - {fileID: 8003693850379035099}
+  - {fileID: 8003693850756789454}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8003693850151283383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8003693850151283381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e27ec1aba4f804207b73e7b034498723, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shoot: 323
+  aim: 324
+  toggleFire: 118
+  reload: 114
+  fireRate: 60
+  bulletSpeed: 150
+  maxAmmo: 15
+  ammo: 15
+  ejectVelocity: 2.5
+  verticalRecoil: 1
+  horizontalRecoil: 0.5
+  verticalSway: 0
+  horizontalSway: 0
+  verticalInaccuracy: 0
+  horizontalInaccuracy: 0
+  reloadTime: 1.5
+  volume: 0
+  zoomMult: 1
+  hasScope: 0
+  canAuto: 0
+  aimToggle: 0
+  left: 0
+  gun: {fileID: 7193300799338650426}
+  bulletPrefab: {fileID: 9086502398145737196, guid: 2b3145c80a9ea984490af420f478a4cb, type: 3}
+  casingPrefab: {fileID: 6607513805091876755, guid: 5a9825458a6460e40bf0073c80c68f61, type: 3}
+  bulletSpawn: {fileID: 8003693850756789454}
+  casingSpawn: {fileID: 8003693850379035099}
+  defaultFOV: 60
+  reloadZoom: 3
+  chargeOpenTime: 0.08
+  horizontalAimAdjust: 0
+  verticalAimAdjust: 0.05
+  zAimAdjust: 0
+  lowerRand: 5
+  upperRand: 10
+--- !u!1 &8003693850379035098
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8003693850379035099}
+  m_Layer: 0
+  m_Name: CasingSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8003693850379035099
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8003693850379035098}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.0424, z: -0.175}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8003693850151283382}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8003693850756789453
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8003693850756789454}
+  m_Layer: 0
+  m_Name: BulletSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8003693850756789454
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8003693850756789453}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.35}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8003693850151283382}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &8003693851255514731
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8003693850151283382}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 12c29ccd56816914e8901fe3638dcd0d, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 12c29ccd56816914e8901fe3638dcd0d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 12c29ccd56816914e8901fe3638dcd0d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 12c29ccd56816914e8901fe3638dcd0d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 12c29ccd56816914e8901fe3638dcd0d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 12c29ccd56816914e8901fe3638dcd0d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 12c29ccd56816914e8901fe3638dcd0d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 12c29ccd56816914e8901fe3638dcd0d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 12c29ccd56816914e8901fe3638dcd0d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 12c29ccd56816914e8901fe3638dcd0d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -180
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 12c29ccd56816914e8901fe3638dcd0d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2717041945756256765, guid: 12c29ccd56816914e8901fe3638dcd0d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 174132719366143ac85976f70995ae90, type: 2}
+    - target: {fileID: -1967758284531576944, guid: 12c29ccd56816914e8901fe3638dcd0d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 174132719366143ac85976f70995ae90, type: 2}
+    - target: {fileID: 919132149155446097, guid: 12c29ccd56816914e8901fe3638dcd0d, type: 3}
+      propertyPath: m_Name
+      value: BarettaM9
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 12c29ccd56816914e8901fe3638dcd0d, type: 3}
+--- !u!1 &7193300799338650426 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 12c29ccd56816914e8901fe3638dcd0d, type: 3}
+  m_PrefabInstance: {fileID: 8003693851255514731}
+  m_PrefabAsset: {fileID: 0}
+--- !u!136 &8003693851255514735
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7193300799338650426}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.028664604
+  m_Height: 0.5984171
+  m_Direction: 2
+  m_Center: {x: 0.000961259, y: 0, z: -0.0020198524}
+--- !u!111 &8003693851255514734
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7193300799338650426}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: -4635461154429966472, guid: 12c29ccd56816914e8901fe3638dcd0d, type: 3}
+  m_Animations:
+  - {fileID: -4635461154429966472, guid: 12c29ccd56816914e8901fe3638dcd0d, type: 3}
+  - {fileID: 1895044741094666348, guid: 12c29ccd56816914e8901fe3638dcd0d, type: 3}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
+--- !u!4 &7536893116677964160 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 12c29ccd56816914e8901fe3638dcd0d, type: 3}
+  m_PrefabInstance: {fileID: 8003693851255514731}
+  m_PrefabAsset: {fileID: 0}
