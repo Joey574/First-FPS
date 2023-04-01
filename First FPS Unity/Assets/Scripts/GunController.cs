@@ -26,6 +26,8 @@ public class GunController : MonoBehaviour
     public float horizontalRecoil;
     public float verticalSway;
     public float horizontalSway;
+    public float verticalInaccuracy;
+    public float horizontalInaccuracy;
     public float reloadTime;
     public float volume;
     public float zoomMult;
