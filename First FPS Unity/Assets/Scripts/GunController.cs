@@ -188,12 +188,16 @@ public class GunController : MonoBehaviour
             ammo--;
             var bullet = Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
             bullet.GetComponent<Rigidbody>().velocity = bulletSpawn.forward * bulletSpeed;
-            anim.SetBool("fireAction", true);
 
             if (ammo == 0)
             {
-                anim.SetBool("lastBullet", true);
+                anim.Play("fireActionIncomplete", animLayer);
             }
+            else
+            {
+                anim.Play("fireActionComplete", animLayer);
+            }
+
 
             cameraScript.addRecoil(verticalRecoil, horizontalRecoil);
 
