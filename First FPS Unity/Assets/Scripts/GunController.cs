@@ -34,7 +34,6 @@ public class GunController : MonoBehaviour
     public bool hasScope;
     public bool canAuto;
     public bool aimToggle;
-    public bool left = false;
 
     [Header("Objects")]
     public GameObject gun;
@@ -46,17 +45,26 @@ public class GunController : MonoBehaviour
     [Header("Adjustments")]
     public float defaultFOV;
     public float reloadZoom = 5.0f;
+    public float defaultAimZoom = 3.0f;
     public float chargeOpenTime;
+    public float hammerDelay;
+    public float slideDelay;
     public float horizontalAimAdjust;
     public float verticalAimAdjust;
     public float zAimAdjust;
-    public float lowerRand;
-    public float upperRand;
+    public float lowerRandX;
+    public float lowerRandY;
+    public float lowerRandZ;
+    public float upperRandX;
+    public float upperRandY;
+    public float upperRandZ;
+    public bool left = false;
 
+    private int animLayer = 0;
     private GameObject hand;
     private GameObject camera;
     private PlayerCam cameraScript;
-    private Animation anim;
+    private Animator anim;
 
     private void Awake()
     {
@@ -70,7 +78,9 @@ public class GunController : MonoBehaviour
         }
         camera = GameObject.Find("PlayerCam");
         cameraScript = camera.GetComponent <PlayerCam> ();
-        anim = gun.GetComponent<Animation>();
+        anim = gun.GetComponent<Animator>();
+        anim.SetFloat("hammerDelay", hammerDelay);
+        anim.SetFloat("slideDelay", slideDelay);
         defaultPos = hand.transform.localPosition;
     }
 
@@ -128,18 +138,22 @@ public class GunController : MonoBehaviour
     
     private void aimHandler()
     {
-         if (!reloading)
+        if (!reloading)
+        {
+            hand.transform.localPosition = new UnityEngine.Vector3(0 - horizontalAimAdjust, 0 - verticalAimAdjust, defaultPos.z - zAimAdjust);
+            if (hasScope)
             {
-                hand.transform.localPosition = new UnityEngine.Vector3(0 - horizontalAimAdjust, 0 - verticalAimAdjust, defaultPos.z - zAimAdjust);
-                if (hasScope)
-                {
-                    cameraScript.setFOV(defaultFOV / zoomMult);
-                }
-            } 
+                cameraScript.setFOV(defaultFOV / zoomMult);
+            }
             else
             {
-                cameraScript.setFOV(defaultFOV / reloadZoom);
+                cameraScript.setFOV(defaultFOV / defaultAimZoom);
             }
+        }
+        else
+        {
+            cameraScript.setFOV(defaultFOV / reloadZoom);
+        }
     }
 
     private void fireHandler()
@@ -174,10 +188,11 @@ public class GunController : MonoBehaviour
             ammo--;
             var bullet = Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
             bullet.GetComponent<Rigidbody>().velocity = bulletSpawn.forward * bulletSpeed;
-            anim.Play("kickBack");
+            anim.SetBool("fireAction", true);
+
             if (ammo == 0)
             {
-                Invoke(nameof(pauseSlideAction), chargeOpenTime);
+                anim.SetBool("lastBullet", true);
             }
 
             cameraScript.addRecoil(verticalRecoil, horizontalRecoil);
@@ -186,21 +201,23 @@ public class GunController : MonoBehaviour
         } 
         else // play click sound 
         {
-            
+            anim.Play("triggerPull", animLayer);
         }
     }
 
     private void spawnCasing()
     {
-        float random = Random.Range(lowerRand, upperRand);   
+        float randomX = Random.Range(lowerRandX, upperRandX);
+        float randomY = Random.Range(lowerRandY, upperRandY);
+        float randomZ = Random.Range(lowerRandZ, upperRandZ);
         var casing = Instantiate(casingPrefab, casingSpawn.position, casingSpawn.rotation);
         casing.GetComponent<Rigidbody>().velocity = casingSpawn.up * ejectVelocity;
-        casing.GetComponent<Rigidbody>().AddTorque(new Vector3(random, random, 0));
+        casing.GetComponent<Rigidbody>().AddTorque(new Vector3(randomX, randomY, randomZ));
     }
 
     private void resetShoot()
     {
-        StartCoroutine(WaitForKickBackAnimation(anim));
+        StartCoroutine(WaitForKickBackAnimation());
     }
 
     private void startReload()
@@ -214,15 +231,10 @@ public class GunController : MonoBehaviour
     {
         if (ammo == 0)
         {
-            anim.Play("closeAction");
+            anim.Play("closeAction", animLayer);
         }
         ammo = maxAmmo;
-        StartCoroutine(WaitForReloadAnimation(anim));
-    }
-
-    private void pauseSlideAction()
-    {
-        anim.Stop("kickBack");
+        StartCoroutine(WaitForCloseActionAnimation());
     }
 
     private void resetAim()
@@ -231,18 +243,18 @@ public class GunController : MonoBehaviour
         hand.transform.localPosition = defaultPos;
     }
 
-    private IEnumerator WaitForKickBackAnimation(Animation animation)
+    private IEnumerator WaitForKickBackAnimation()
     {
-        while(animation.isPlaying)
+        while(isPlaying("fireActionComplete") || isPlaying("fireActionIncomplete"))
         {
             yield return null;
         }
         readyToShoot = true;
     }
 
-    private IEnumerator WaitForReloadAnimation(Animation animaton)
+    private IEnumerator WaitForCloseActionAnimation()
     {
-        while (animaton.isPlaying)
+        while (isPlaying("closeAction"))
         {
             yield return null;
         }
@@ -256,5 +268,14 @@ public class GunController : MonoBehaviour
         {
             aimHandler();
         }
+    }
+
+    bool isPlaying(string stateName)
+    {
+        if (anim.GetCurrentAnimatorStateInfo(animLayer).IsName(stateName) &&
+                anim.GetCurrentAnimatorStateInfo(animLayer).normalizedTime < 1.0f)
+            return true;
+        else
+            return false;
     }
 }
