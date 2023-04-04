@@ -77,6 +77,8 @@ MonoBehaviour:
   reloadZoom: 3
   defaultAimZoom: 3
   chargeOpenTime: 0.08
+  hammerDelay: 0
+  slideDelay: 0
   horizontalAimAdjust: 0
   verticalAimAdjust: 0.05
   zAimAdjust: 0

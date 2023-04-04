@@ -15,6 +15,7 @@ public class GunController : MonoBehaviour
     private bool reloading = false;
     private bool auto = true;
     private bool aiming = false;
+    private bool resetAimingToggle = false;
 
     [Header("Gun Data")]
     public float fireRate;
@@ -95,35 +96,8 @@ public class GunController : MonoBehaviour
         {
             startReload();
         }
-        
-        if (aimToggle)
-        {
-            if (Input.GetKeyDown(aim) && !aiming)
-            {
-                aiming = true;
-                aimHandler();
-            }
-            
-            if (Input.GetKeyDown(aim) && aiming)
-            {
-                aiming = false;
-                resetAim(); 
-            }
-        }
-        else
-        {
-             if (Input.GetKey(aim))
-            {
-                aiming = true;
-                aimHandler();
-            }
-            
-            if (Input.GetKeyUp(aim))
-            {
-                aiming = false;
-                resetAim();
-            }
-        } 
+
+        aimController();
         
         if (!reloading)
         {
@@ -156,6 +130,45 @@ public class GunController : MonoBehaviour
         }
     }
 
+    private void aimController()
+    {
+        if (aimToggle)
+        {
+            if (Input.GetKeyUp(aim) && !resetAimingToggle)
+            {
+                resetAimingToggle = true;
+            }
+
+            if (Input.GetKeyDown(aim) && !aiming && resetAimingToggle)
+            {
+                aiming = true;
+                resetAimingToggle = false;
+                aimHandler();
+            }
+
+            if (Input.GetKeyDown(aim) && aiming && resetAimingToggle)
+            {
+                aiming = false;
+                resetAimingToggle = false;
+                resetAim();
+            }
+        }
+        else
+        {
+            if (Input.GetKey(aim))
+            {
+                aiming = true;
+                aimHandler();
+            }
+
+            if (Input.GetKeyUp(aim))
+            {
+                aiming = false;
+                resetAim();
+            }
+        }
+    }
+
     private void fireHandler()
     {
         if (canAuto && auto)
@@ -176,8 +189,8 @@ public class GunController : MonoBehaviour
             
             if (Input.GetKeyDown(shoot) && readyToShoot)
             {
-                spawnBullet();
                 readyToShoot = false;
+                spawnBullet();
             }
         }
     }
@@ -198,14 +211,11 @@ public class GunController : MonoBehaviour
                 anim.Play("fireActionComplete", animLayer);
             }
 
-
-            cameraScript.addRecoil(verticalRecoil, horizontalRecoil);
-
             Invoke(nameof(spawnCasing), chargeOpenTime);
         } 
         else // play click sound 
         {
-            anim.Play("triggerPull", animLayer);
+
         }
     }
 
@@ -217,6 +227,7 @@ public class GunController : MonoBehaviour
         var casing = Instantiate(casingPrefab, casingSpawn.position, casingSpawn.rotation);
         casing.GetComponent<Rigidbody>().velocity = casingSpawn.up * ejectVelocity;
         casing.GetComponent<Rigidbody>().AddTorque(new Vector3(randomX, randomY, randomZ));
+        cameraScript.addRecoil(verticalRecoil, horizontalRecoil);
     }
 
     private void resetShoot()
@@ -249,7 +260,8 @@ public class GunController : MonoBehaviour
 
     private IEnumerator WaitForKickBackAnimation()
     {
-        while(isPlaying("fireActionComplete") || isPlaying("fireActionIncomplete"))
+        while(isPlaying("fireActionComplete") || isPlaying("fireActionIncomplete") ||
+            isPlaying("hammerAction") || isPlaying("slideAction"))
         {
             yield return null;
         }
