@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GunController : MonoBehaviour
@@ -35,6 +36,7 @@ public class GunController : MonoBehaviour
     public bool hasScope;
     public bool canAuto;
     public bool aimToggle;
+    public bool equipped = false;
 
     [Header("Objects")]
     public GameObject gun;
@@ -59,7 +61,6 @@ public class GunController : MonoBehaviour
     public float upperRandX;
     public float upperRandY;
     public float upperRandZ;
-    public bool left = false;
 
     private int animLayer = 0;
     private GameObject hand;
@@ -69,14 +70,11 @@ public class GunController : MonoBehaviour
 
     private void Awake()
     {
-        if (left)
-        {
-            hand = GameObject.Find("LeftHand");
-        }
-        else
+        if (equipped)
         {
             hand = GameObject.Find("RightHand");
         }
+
         camera = GameObject.Find("PlayerCam");
         cameraScript = camera.GetComponent <PlayerCam> ();
         anim = gun.GetComponent<Animator>();
@@ -260,8 +258,7 @@ public class GunController : MonoBehaviour
 
     private IEnumerator WaitForKickBackAnimation()
     {
-        while(isPlaying("fireActionComplete") || isPlaying("fireActionIncomplete") ||
-            isPlaying("hammerAction") || isPlaying("slideAction"))
+        while(!anim.GetCurrentAnimatorStateInfo(animLayer).IsName("Idle"))
         {
             yield return null;
         }
@@ -270,7 +267,7 @@ public class GunController : MonoBehaviour
 
     private IEnumerator WaitForCloseActionAnimation()
     {
-        while (isPlaying("closeAction"))
+        while (anim.GetCurrentAnimatorStateInfo(animLayer).IsName("closeAction"))
         {
             yield return null;
         }
@@ -284,14 +281,5 @@ public class GunController : MonoBehaviour
         {
             aimHandler();
         }
-    }
-
-    bool isPlaying(string stateName)
-    {
-        if (anim.GetCurrentAnimatorStateInfo(animLayer).IsName(stateName) &&
-                anim.GetCurrentAnimatorStateInfo(animLayer).normalizedTime < 1.0f)
-            return true;
-        else
-            return false;
     }
 }

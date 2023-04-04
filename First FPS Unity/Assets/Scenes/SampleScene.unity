@@ -1443,6 +1443,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8003693850151283383, guid: 5241e6cf86bcba349ae9472416a7dfb3, type: 3}
+      propertyPath: equipped
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8003693850151283383, guid: 5241e6cf86bcba349ae9472416a7dfb3, type: 3}
       propertyPath: aimToggle
       value: 0
       objectReference: {fileID: 0}
@@ -1476,7 +1480,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8003693850151283383, guid: 5241e6cf86bcba349ae9472416a7dfb3, type: 3}
       propertyPath: zAimAdjust
-      value: 0.35
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 8003693850151283383, guid: 5241e6cf86bcba349ae9472416a7dfb3, type: 3}
       propertyPath: hammerDelay
@@ -1492,7 +1496,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8003693850151283383, guid: 5241e6cf86bcba349ae9472416a7dfb3, type: 3}
       propertyPath: verticalAimAdjust
-      value: 0.12
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 8003693850151283383, guid: 5241e6cf86bcba349ae9472416a7dfb3, type: 3}
       propertyPath: horizontalAimAdjust
@@ -1500,11 +1504,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8003693850379035099, guid: 5241e6cf86bcba349ae9472416a7dfb3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.131
+      value: 0.157
       objectReference: {fileID: 0}
     - target: {fileID: 8003693850379035099, guid: 5241e6cf86bcba349ae9472416a7dfb3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.3229
+      value: -0.366
       objectReference: {fileID: 0}
     - target: {fileID: 8003693850379035099, guid: 5241e6cf86bcba349ae9472416a7dfb3, type: 3}
       propertyPath: m_ConstrainProportionsScale
@@ -1512,11 +1516,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8003693850756789454, guid: 5241e6cf86bcba349ae9472416a7dfb3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.08
+      value: 0.1043
       objectReference: {fileID: 0}
     - target: {fileID: 8003693850756789454, guid: 5241e6cf86bcba349ae9472416a7dfb3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.081
+      value: 0.098
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5241e6cf86bcba349ae9472416a7dfb3, type: 3}
@@ -1535,10 +1539,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.05153793
-  m_Height: 0.5530757
+  m_Radius: 0.049660146
+  m_Height: 0.62060094
   m_Direction: 2
-  m_Center: {x: 0, y: 0.06412619, z: -0.15171921}
+  m_Center: {x: 0, y: 0.09158939, z: -0.22227001}
 --- !u!1 &2005048036
 GameObject:
   m_ObjectHideFlags: 0
