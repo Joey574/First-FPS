@@ -45,7 +45,7 @@ public class GunController : MonoBehaviour
     [Header("Adjustments")]
     public float defaultFOV;
     public float reloadZoom = 5.0f;
-    public float defaultAimZoom = 3.0f;
+    public float defaultAimZoom = 1.5f;
     public float chargeOpenTime;
     public float hammerDelay;
     public float slideDelay;
