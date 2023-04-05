@@ -36,7 +36,8 @@ public class GunController : MonoBehaviour
     public bool hasScope;
     public bool canAuto;
     public bool aimToggle;
-    public bool equipped = false;
+
+    private bool equipped;
 
     [Header("Objects")]
     public GameObject gun;
@@ -70,11 +71,7 @@ public class GunController : MonoBehaviour
 
     private void Awake()
     {
-        if (equipped)
-        {
-            hand = GameObject.Find("RightHand");
-        }
-
+        hand = GameObject.Find("RightHand");
         camera = GameObject.Find("PlayerCam");
         cameraScript = camera.GetComponent <PlayerCam> ();
         anim = gun.GetComponent<Animator>();
@@ -85,27 +82,29 @@ public class GunController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(toggleFire))
+        if (equipped)
         {
-            auto = !auto;
-        }
+            if (Input.GetKeyDown(toggleFire))
+            {
+                auto = !auto;
+            }
 
-        if (Input.GetKeyDown(reload))
-        {
-            startReload();
-        }
+            if (Input.GetKeyDown(reload))
+            {
+                startReload();
+            }
 
-        aimController();
-        
-        if (!reloading)
-        {
-            fireHandler();
-        } 
-        else if (reloading && Input.GetKey(shoot)) // when reload anim added, swith to coroutine to wait before setting ammo, then stop coroutine
-        {
-        
+            aimController();
+
+            if (!reloading)
+            {
+                fireHandler();
+            }
+            else if (reloading && Input.GetKey(shoot)) // when reload anim added, swith to coroutine to wait before setting ammo, then stop coroutine
+            {
+
+            }
         }
-       
     }
     
     private void aimHandler()
@@ -250,6 +249,11 @@ public class GunController : MonoBehaviour
         StartCoroutine(WaitForCloseActionAnimation());
     }
 
+    public void setEquipped(bool equipped)
+    {
+        this.equipped = equipped;
+    }
+
     private void resetAim()
     {
         cameraScript.setFOV(defaultFOV);
@@ -258,7 +262,7 @@ public class GunController : MonoBehaviour
 
     private IEnumerator WaitForKickBackAnimation()
     {
-        while(!anim.GetCurrentAnimatorStateInfo(animLayer).IsName("Idle"))
+        while(!anim.GetCurrentAnimatorStateInfo(animLayer).IsTag("Idle"))
         {
             yield return null;
         }

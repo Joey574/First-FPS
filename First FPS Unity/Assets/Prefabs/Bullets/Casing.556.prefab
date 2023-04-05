@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8594847660236738847}
   - component: {fileID: 8961754158314074918}
   - component: {fileID: 5821182167246524194}
-  - component: {fileID: 6564206838018350737}
+  - component: {fileID: 204845043624591580}
   m_Layer: 0
   m_Name: Casing.556
   m_TagString: Untagged
@@ -115,7 +115,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &6564206838018350737
+--- !u!65 &204845043624591580
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -126,5 +126,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.0019950713, y: 0.0019950708, z: 0.0051953746}
-  m_Center: {x: 0, y: 1.1352253e-17, z: 0.0015976874}
+  m_Size: {x: 0.0009975357, y: 0.0009975354, z: 0.0025976873}
+  m_Center: {x: 0, y: 5.6761266e-18, z: 0.0007988437}

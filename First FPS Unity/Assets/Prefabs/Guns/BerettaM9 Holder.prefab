@@ -10,6 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 8003693850151283382}
   - component: {fileID: 8003693850151283383}
+  - component: {fileID: 4302932587735076457}
+  - component: {fileID: 7478666230721052121}
+  - component: {fileID: 1471290877249778392}
+  - component: {fileID: 3840622799549296430}
   m_Layer: 0
   m_Name: BerettaM9 Holder
   m_TagString: Untagged
@@ -88,7 +92,69 @@ MonoBehaviour:
   upperRandX: 0
   upperRandY: 0
   upperRandZ: 0
-  left: 0
+--- !u!114 &4302932587735076457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8003693850151283381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb5e777d118aa4fd3a6ae9e79fc4695f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  equipped: 0
+  gun: {fileID: 8003693850151283381}
+  player: {fileID: 0}
+  hand: {fileID: 0}
+  camera: {fileID: 0}
+  pickUpRange: 0
+  drop: 103
+  pickUp: 102
+--- !u!54 &7478666230721052121
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8003693850151283381}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!136 &1471290877249778392
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8003693850151283381}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.049660146
+  m_Height: 0.62060094
+  m_Direction: 2
+  m_Center: {x: 0, y: 0.09158939, z: -0.22227001}
+--- !u!65 &3840622799549296430
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8003693850151283381}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.07205209, y: 0.26727438, z: 0.19860005}
+  m_Center: {x: 0, y: -0.086579084, z: -0.4557289}
 --- !u!1 &8003693850379035098
 GameObject:
   m_ObjectHideFlags: 0

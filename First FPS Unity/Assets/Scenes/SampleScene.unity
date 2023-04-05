@@ -596,11 +596,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &614425964 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8003693850151283381, guid: 5241e6cf86bcba349ae9472416a7dfb3, type: 3}
-  m_PrefabInstance: {fileID: 1928977666}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -793,6 +788,7 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
+  name: yannick
   orientation: {fileID: 1402144978}
 --- !u!1 &954891412
 GameObject:
@@ -1529,20 +1525,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8003693850151283382, guid: 5241e6cf86bcba349ae9472416a7dfb3, type: 3}
   m_PrefabInstance: {fileID: 1928977666}
   m_PrefabAsset: {fileID: 0}
---- !u!136 &1928977669
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 614425964}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.049660146
-  m_Height: 0.62060094
-  m_Direction: 2
-  m_Center: {x: 0, y: 0.09158939, z: -0.22227001}
 --- !u!1 &2005048036
 GameObject:
   m_ObjectHideFlags: 0
