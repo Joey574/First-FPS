@@ -4,70 +4,59 @@ using UnityEngine;
 
 public class PickUpController : MonoBehaviour
 {
-    public bool equipped = false;
+
+    public bool hasObject = false;
 
     [Header("Keybinds")]
     public KeyCode drop = KeyCode.G;
     public KeyCode pickUp = KeyCode.F;
 
     [Header("Objects")]
-    public GameObject gun;
-    public Transform player, hand, camera;
+    public Transform camera;
 
     [Header("Adjustments")]
-    public float pickUpRange;
     public float upForce;
     public float forwardForce;
+    
+    [Header("Raycast Values"]
+    public float p1;
+    public float p2;
+    public float radus;
+    public float distance;
 
-    private GunController gunScript;
-    private Rigidbody gunRB;
+    private RayCastHit hit;
+    private equipHandler item;
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        gunScript = gun.GetComponent<GunController>();
-        gunRB = gun.GetComponent<Rigidbody>();
-        gunScript.setEquipped(equipped);
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        Vector3 distanceToPlayer = player.position - transform.position;
 
-        if (equipped && Input.GetKeyDown(drop))
+        if (hasObject && Input.GetKeyDown(drop))
         {
-            equipped = false;
-            gunScript.setEquipped(equipped);
+            hasObject = false;
             Drop();
         }
 
-        if (!equipped && Input.GetKeyDown(pickUp) && distanceToPlayer.magnitude <= pickUpRange)
+        if (!hasObject && Input.GetKeyDown(pickUp))
         {
-            equipped = true;
-            gunScript.setEquipped(equipped);
+            hasObject = true;
             PickUp();
         }
-
     }
-
+    
     private void Drop()
     {
-        gunRB.isKinematic = false;
-        transform.SetParent(null, true);
-
-        gunRB.velocity = player.GetComponent<Rigidbody>().velocity;
-
-        gunRB.AddForce(camera.forward * forwardForce, ForceMode.Impulse);
-        gunRB.AddForce(camera.up * upForce, ForceMode.Impulse);
+        if (item != null) 
+        {
+            item.setEquipped(false);
+        }
     }
 
     private void PickUp()
     {
-        gunRB.isKinematic = true;
-        transform.SetParent(hand);
-        transform.localPosition = Vector3.zero;
-        transform.localRotation = Quaternion.Euler(Vector3.zero);
+        if (Physics.CapsuleCast(p1, p2, radius, camera.forward, out hit, distance) && hit.transform.tag == "Equippable") 
+           {
+               item = hit.getComponent<equipHandler>();
+               item.setEquipped(true);
+           }
     }
 }
