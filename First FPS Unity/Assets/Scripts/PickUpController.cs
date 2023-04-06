@@ -6,6 +6,10 @@ public class PickUpController : MonoBehaviour
 {
     public bool equipped = false;
 
+    [Header("Keybinds")]
+    public KeyCode drop = KeyCode.G;
+    public KeyCode pickUp = KeyCode.F;
+
     [Header("Objects")]
     public GameObject gun;
     public Transform player, hand, camera;
@@ -14,10 +18,6 @@ public class PickUpController : MonoBehaviour
     public float pickUpRange;
     public float upForce;
     public float forwardForce;
-
-    [Header("Keybinds")]
-    public KeyCode drop = KeyCode.G;
-    public KeyCode pickUp = KeyCode.F;
 
     private GunController gunScript;
     private Rigidbody gunRB;
