@@ -12,6 +12,8 @@ public class PickUpController : MonoBehaviour
 
     [Header("Adjustments")]
     public float pickUpRange;
+    public float upForce;
+    public float forwardForce;
 
     [Header("Keybinds")]
     public KeyCode drop = KeyCode.G;
@@ -19,6 +21,7 @@ public class PickUpController : MonoBehaviour
 
     private GunController gunScript;
     private Rigidbody gunRB;
+
 
     // Start is called before the first frame update
     void Start()
@@ -31,20 +34,40 @@ public class PickUpController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Vector3 distanceToPlayer = player.position - transform.position;
 
         if (equipped && Input.GetKeyDown(drop))
         {
             equipped = false;
             gunScript.setEquipped(equipped);
+            Drop();
         }
 
-        if (equipped)
+        if (!equipped && Input.GetKeyDown(pickUp) && distanceToPlayer.magnitude <= pickUpRange)
         {
-            gunRB.isKinematic = true;
+            equipped = true;
+            gunScript.setEquipped(equipped);
+            PickUp();
         }
-        else
-        {
-            gunRB.isKinematic = false;
-        }
+
+    }
+
+    private void Drop()
+    {
+        gunRB.isKinematic = false;
+        transform.SetParent(null, true);
+
+        gunRB.velocity = player.GetComponent<Rigidbody>().velocity;
+
+        gunRB.AddForce(camera.forward * forwardForce, ForceMode.Impulse);
+        gunRB.AddForce(camera.up * upForce, ForceMode.Impulse);
+    }
+
+    private void PickUp()
+    {
+        gunRB.isKinematic = true;
+        transform.SetParent(hand);
+        transform.localPosition = Vector3.zero;
+        transform.localRotation = Quaternion.Euler(Vector3.zero);
     }
 }

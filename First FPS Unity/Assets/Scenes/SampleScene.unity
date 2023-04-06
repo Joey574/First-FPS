@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1390,6 +1390,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 959421897}
     m_Modifications:
+    - target: {fileID: 4302932587735076457, guid: 5241e6cf86bcba349ae9472416a7dfb3, type: 3}
+      propertyPath: hand
+      value: 
+      objectReference: {fileID: 959421897}
+    - target: {fileID: 4302932587735076457, guid: 5241e6cf86bcba349ae9472416a7dfb3, type: 3}
+      propertyPath: camera
+      value: 
+      objectReference: {fileID: 963194228}
+    - target: {fileID: 4302932587735076457, guid: 5241e6cf86bcba349ae9472416a7dfb3, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 836712479}
     - target: {fileID: 8003693850151283381, guid: 5241e6cf86bcba349ae9472416a7dfb3, type: 3}
       propertyPath: m_Name
       value: BerettaM9 Holder
@@ -1441,62 +1453,6 @@ PrefabInstance:
     - target: {fileID: 8003693850151283383, guid: 5241e6cf86bcba349ae9472416a7dfb3, type: 3}
       propertyPath: equipped
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8003693850151283383, guid: 5241e6cf86bcba349ae9472416a7dfb3, type: 3}
-      propertyPath: aimToggle
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8003693850151283383, guid: 5241e6cf86bcba349ae9472416a7dfb3, type: 3}
-      propertyPath: lowerRandX
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 8003693850151283383, guid: 5241e6cf86bcba349ae9472416a7dfb3, type: 3}
-      propertyPath: lowerRandY
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8003693850151283383, guid: 5241e6cf86bcba349ae9472416a7dfb3, type: 3}
-      propertyPath: lowerRandZ
-      value: -2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8003693850151283383, guid: 5241e6cf86bcba349ae9472416a7dfb3, type: 3}
-      propertyPath: slideDelay
-      value: 0.08
-      objectReference: {fileID: 0}
-    - target: {fileID: 8003693850151283383, guid: 5241e6cf86bcba349ae9472416a7dfb3, type: 3}
-      propertyPath: upperRandX
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 8003693850151283383, guid: 5241e6cf86bcba349ae9472416a7dfb3, type: 3}
-      propertyPath: upperRandY
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8003693850151283383, guid: 5241e6cf86bcba349ae9472416a7dfb3, type: 3}
-      propertyPath: upperRandZ
-      value: -5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8003693850151283383, guid: 5241e6cf86bcba349ae9472416a7dfb3, type: 3}
-      propertyPath: zAimAdjust
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8003693850151283383, guid: 5241e6cf86bcba349ae9472416a7dfb3, type: 3}
-      propertyPath: hammerDelay
-      value: 0.08
-      objectReference: {fileID: 0}
-    - target: {fileID: 8003693850151283383, guid: 5241e6cf86bcba349ae9472416a7dfb3, type: 3}
-      propertyPath: chargeOpenTime
-      value: 0.16
-      objectReference: {fileID: 0}
-    - target: {fileID: 8003693850151283383, guid: 5241e6cf86bcba349ae9472416a7dfb3, type: 3}
-      propertyPath: defaultAimZoom
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8003693850151283383, guid: 5241e6cf86bcba349ae9472416a7dfb3, type: 3}
-      propertyPath: verticalAimAdjust
-      value: 0.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 8003693850151283383, guid: 5241e6cf86bcba349ae9472416a7dfb3, type: 3}
-      propertyPath: horizontalAimAdjust
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8003693850379035099, guid: 5241e6cf86bcba349ae9472416a7dfb3, type: 3}
       propertyPath: m_LocalPosition.y
