@@ -15,8 +15,6 @@ public class PickUpController : MonoBehaviour
     public Transform camera;
 
     [Header("Adjustments")]
-    public Vector3 p1;
-    public Vector3 p2;
     public float upForce;
     public float forwardForce;
     
@@ -32,9 +30,6 @@ public class PickUpController : MonoBehaviour
 
     void Update()
     {
-        P1 = camera.position;
-        P2 = camera.position;
-
         if (hasObject && Input.GetKeyDown(drop))
         {
             Drop();
@@ -57,7 +52,9 @@ public class PickUpController : MonoBehaviour
 
     private void PickUp()
     {
-        if (Physics.CapsuleCast(P1 + p1, P2 + p2, radius, camera.forward, out hit, distance, LayerMask.GetMask("Items")))
+        P1 = camera.position;
+        P2 = camera.position;
+        if (Physics.CapsuleCast(P1, P2, radius, camera.forward, out hit, distance, LayerMask.GetMask("Items")))
            {
                item = hit.transform.GetComponent<UniversalItemHandler>();
                item.setEquipped(true);
