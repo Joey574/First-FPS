@@ -10,16 +10,35 @@ public class KeybindsController : MonoBehaviour
     public KeyCode drop = KeyCode.G;
     public KeyCode reload = KeyCode.R;
     public KeyCode toggleFire = KeyCode.V;
-
-    // Start is called before the first frame update
+    
+    private KeyCode [] fireKeys = new KeyCode [];
+    private KeyCode [] itemInteractions = new KeyCode [];
+    
     void Start()
     {
+        // gun control keys
+        fireKeys.add(shoot);
+        fireKeys.add(aim);
+        fireKeys.add(reload);
+        fireKeys.add(toggleFire);
         
+        // item interation keys
+        itemInteractions.add(pickUp);
+        itemInteractions.add(drop);
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
         
+    }
+    
+    public KeyCode [] FireKeys()
+    {
+        return fireKeys;
+    }
+    
+    public KeyCode [] ItemInterations()
+    {
+        return itemInteractions;
     }
 }
