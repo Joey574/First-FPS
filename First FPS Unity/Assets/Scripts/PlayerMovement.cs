@@ -22,9 +22,6 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask whatIsGround;
     bool grounded;
 
-    [Header("Name")]
-    public string name = "yannick";
-
     public Transform orientation;
 
     float horizontalInput;

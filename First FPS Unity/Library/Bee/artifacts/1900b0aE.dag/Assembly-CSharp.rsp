@@ -350,6 +350,7 @@
 "Assets/Scripts/PickUpController.cs"
 "Assets/Scripts/PlayerCam.cs"
 "Assets/Scripts/PlayerMovement.cs"
+"Assets/Scripts/UniversalItemHandler.cs"
 -langversion:9.0
 
 /deterministic

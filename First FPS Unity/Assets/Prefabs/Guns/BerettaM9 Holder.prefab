@@ -10,13 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 8003693850151283382}
   - component: {fileID: 8003693850151283383}
-  - component: {fileID: 4302932587735076457}
+  - component: {fileID: 5002340957606547500}
   - component: {fileID: 7478666230721052121}
   - component: {fileID: 1471290877249778392}
   - component: {fileID: 3840622799549296430}
   m_Layer: 0
   m_Name: BerettaM9 Holder
-  m_TagString: Untagged
+  m_TagString: Equippable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -92,7 +92,7 @@ MonoBehaviour:
   upperRandX: 12
   upperRandY: 5
   upperRandZ: -5
---- !u!114 &4302932587735076457
+--- !u!114 &5002340957606547500
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -101,19 +101,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 8003693850151283381}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb5e777d118aa4fd3a6ae9e79fc4695f, type: 3}
+  m_Script: {fileID: 11500000, guid: ba83b3141db7c9d42bd6e7aa2b99d0a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  equipped: 1
-  gun: {fileID: 8003693850151283381}
-  player: {fileID: 0}
-  hand: {fileID: 0}
-  camera: {fileID: 0}
-  pickUpRange: 2
-  upForce: 0.5
-  forwardForce: 1
-  drop: 103
-  pickUp: 102
+  handName: RightHand
+  rb: {fileID: 7478666230721052121}
+  gun: 1
 --- !u!54 &7478666230721052121
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -126,7 +119,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -281,6 +274,26 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 78e3b5633c7796142becb691317faf7c, type: 3}
   m_PrefabInstance: {fileID: 9070970074533306551}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &2969761631747392773
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8152613638349037030}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 791d7b765ae124351a2d8f211343700f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!4 &8820359537945790300 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 78e3b5633c7796142becb691317faf7c, type: 3}
