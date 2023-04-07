@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PickUpController : MonoBehaviour
 {
-
     public bool hasObject = false;
 
     [Header("Keybinds")]
@@ -25,8 +24,8 @@ public class PickUpController : MonoBehaviour
     private RaycastHit hit;
     private UniversalItemHandler item;
 
-    private Vector3 P1;
-    private Vector3 P2;
+    private Vector3 p1;
+    private Vector3 p2;
 
     void Update()
     {
@@ -52,9 +51,9 @@ public class PickUpController : MonoBehaviour
 
     private void PickUp()
     {
-        P1 = camera.position;
-        P2 = camera.position;
-        if (Physics.CapsuleCast(P1, P2, radius, camera.forward, out hit, distance, LayerMask.GetMask("Items")))
+        p1 = camera.position;
+        p2 = camera.position;
+        if (Physics.CapsuleCast(p1, p2, radius, camera.forward, out hit, distance, LayerMask.GetMask("Items")))
            {
                item = hit.transform.GetComponent<UniversalItemHandler>();
                item.setEquipped(true);
