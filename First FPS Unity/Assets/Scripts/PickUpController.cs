@@ -57,7 +57,7 @@ public class PickUpController : MonoBehaviour
 
     private void PickUp()
     {
-        if (Physics.CapsuleCast(P1 + p1, P2 + p2, radius, camera.forward, out hit, distance) && hit.transform.tag == "Equippable") 
+        if (Physics.CapsuleCast(P1 + p1, P2 + p2, radius, camera.forward, out hit, distance, LayerMask.GetMask("Items")))
            {
                item = hit.transform.GetComponent<UniversalItemHandler>();
                item.setEquipped(true);

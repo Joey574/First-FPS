@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 7478666230721052121}
   - component: {fileID: 1471290877249778392}
   - component: {fileID: 3840622799549296430}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BerettaM9 Holder
-  m_TagString: Equippable
+  m_TagString: Gun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -85,13 +85,13 @@ MonoBehaviour:
   slideDelay: 0.08
   horizontalAimAdjust: 0
   verticalAimAdjust: 0.15
-  zAimAdjust: 0.2
-  lowerRandX: 8
-  lowerRandY: 1
-  lowerRandZ: -2
-  upperRandX: 12
-  upperRandY: 5
-  upperRandZ: -5
+  zAimAdjust: 0.1
+  lowerRandFB: 1
+  lowerRandLR: 4
+  lowerRandUD: 2
+  upperRandFB: 5
+  upperRandLR: 8
+  upperRandUD: 4
 --- !u!114 &5002340957606547500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,7 +159,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8003693850379035099}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CasingSpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -190,7 +190,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8003693850756789454}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BulletSpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -263,9 +263,41 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6911082072965023849, guid: 78e3b5633c7796142becb691317faf7c, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -2059808378567916338, guid: 78e3b5633c7796142becb691317faf7c, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 78e3b5633c7796142becb691317faf7c, type: 3}
       propertyPath: m_Name
       value: BerettaM9
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 78e3b5633c7796142becb691317faf7c, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 977545376350135175, guid: 78e3b5633c7796142becb691317faf7c, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1214824004972775095, guid: 78e3b5633c7796142becb691317faf7c, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2271436178238224595, guid: 78e3b5633c7796142becb691317faf7c, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6619225641134156614, guid: 78e3b5633c7796142becb691317faf7c, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8351053838077304830, guid: 78e3b5633c7796142becb691317faf7c, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78e3b5633c7796142becb691317faf7c, type: 3}

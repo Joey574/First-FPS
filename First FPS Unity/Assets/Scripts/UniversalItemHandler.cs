@@ -34,7 +34,8 @@ public class UniversalItemHandler : MonoBehaviour
     {
         this.equipped = equipped;
         equipUpdate();
-        rb.AddForce(0, upForce, forwardForce, ForceMode.Impulse);
+        rb.AddForce(transform.forward * forwardForce, ForceMode.Impulse);
+        rb.AddForce(transform.up * upForce, ForceMode.Impulse);
     }
 
     public void equipUpdate()

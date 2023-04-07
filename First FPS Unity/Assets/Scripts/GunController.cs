@@ -56,12 +56,12 @@ public class GunController : MonoBehaviour
     public float horizontalAimAdjust;
     public float verticalAimAdjust;
     public float zAimAdjust;
-    public float lowerRandX;
-    public float lowerRandY;
-    public float lowerRandZ;
-    public float upperRandX;
-    public float upperRandY;
-    public float upperRandZ;
+    public float lowerRandFB;
+    public float lowerRandLR;
+    public float lowerRandUD;
+    public float upperRandFB;
+    public float upperRandLR;
+    public float upperRandUD;
 
     private int animLayer = 0;
     private GameObject hand;
@@ -218,12 +218,14 @@ public class GunController : MonoBehaviour
 
     private void spawnCasing()
     {
-        float randomX = Random.Range(lowerRandX, upperRandX);
-        float randomY = Random.Range(lowerRandY, upperRandY);
-        float randomZ = Random.Range(lowerRandZ, upperRandZ);
+        float randomLR = Random.Range(lowerRandLR, upperRandLR);
+        float randomFB = Random.Range(lowerRandFB, upperRandFB);
+        float randomUD = Random.Range(lowerRandUD, upperRandUD);
         var casing = Instantiate(casingPrefab, casingSpawn.position, casingSpawn.rotation);
         casing.GetComponent<Rigidbody>().velocity = casingSpawn.up * ejectVelocity;
-        casing.GetComponent<Rigidbody>().AddTorque(new Vector3(randomX, randomY, randomZ));
+        casing.GetComponent<Rigidbody>().AddTorque(transform.right * randomLR);
+        casing.GetComponent<Rigidbody>().AddTorque(transform.up * randomUD);
+        casing.GetComponent<Rigidbody>().AddTorque(transform.forward * randomFB);
         cameraScript.addRecoil(verticalRecoil, horizontalRecoil);
     }
 
