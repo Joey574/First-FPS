@@ -14,9 +14,6 @@ public class PlayerMovement : MonoBehaviour
     public float airMultiplier;
     bool readyToJump = true;
 
-    [Header("Keybinds")]
-    public KeyCode jumpKey = KeyCode.Space;
-
     [Header("Ground Check")]
     public float playerHeight;
     public LayerMask whatIsGround;
@@ -31,8 +28,13 @@ public class PlayerMovement : MonoBehaviour
 
     Rigidbody rb;
 
+    private GameObject gameManager;
+    private KeybindsController keybinds;
+
     private void Start()
     {
+        gameManager = GameObject.Find("GameManager");
+        keybinds = gameManager.GetComponent<KeybindsController>();
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
     }
@@ -63,7 +65,7 @@ public class PlayerMovement : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetKey(jumpKey) && readyToJump && grounded)
+        if (Input.GetKey(keybinds.Jump()) && readyToJump && grounded)
         {
             readyToJump = false;
             Jump();

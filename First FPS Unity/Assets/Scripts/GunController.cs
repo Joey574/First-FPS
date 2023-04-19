@@ -5,12 +5,6 @@ using UnityEngine;
 
 public class GunController : MonoBehaviour
 {
-    [Header("Keybinds")]
-    public KeyCode shoot = KeyCode.Mouse0;
-    public KeyCode aim = KeyCode.Mouse1;
-    public KeyCode toggleFire = KeyCode.V;
-    public KeyCode reload = KeyCode.R;
-
     private UnityEngine.Vector3 defaultPos;
     private bool readyToShoot = true;
     private bool reloading = false;
@@ -69,8 +63,13 @@ public class GunController : MonoBehaviour
     private PlayerCam cameraScript;
     private Animator anim;
 
+    private GameObject gameManager;
+    private KeybindsController keybinds;
+
     private void Awake()
     {
+        gameManager = GameObject.Find("GameManager");
+        keybinds = gameManager.GetComponent<KeybindsController>();
         hand = GameObject.Find("RightHand");
         camera = GameObject.Find("PlayerCam");
         cameraScript = camera.GetComponent <PlayerCam> ();
@@ -84,12 +83,12 @@ public class GunController : MonoBehaviour
     {
         if (equipped)
         {
-            if (Input.GetKeyDown(toggleFire))
+            if (Input.GetKeyDown(keybinds.ToggleFire()))
             {
                 auto = !auto;
             }
 
-            if (Input.GetKeyDown(reload))
+            if (Input.GetKeyDown(keybinds.Reload()))
             {
                 startReload();
             }
@@ -100,7 +99,7 @@ public class GunController : MonoBehaviour
             {
                 fireHandler();
             }
-            else if (reloading && Input.GetKey(shoot)) // when reload anim added, swith to coroutine to wait before setting ammo, then stop coroutine
+            else if (reloading && Input.GetKey(keybinds.Shoot())) // when reload anim added, swith to coroutine to wait before setting ammo, then stop coroutine
             {
 
             }
@@ -131,19 +130,19 @@ public class GunController : MonoBehaviour
     {
         if (aimToggle)
         {
-            if (Input.GetKeyUp(aim) && !resetAimingToggle)
+            if (Input.GetKeyUp(keybinds.Aim()) && !resetAimingToggle)
             {
                 resetAimingToggle = true;
             }
 
-            if (Input.GetKeyDown(aim) && !aiming && resetAimingToggle)
+            if (Input.GetKeyDown(keybinds.Aim()) && !aiming && resetAimingToggle)
             {
                 aiming = true;
                 resetAimingToggle = false;
                 aimHandler();
             }
 
-            if (Input.GetKeyDown(aim) && aiming && resetAimingToggle)
+            if (Input.GetKeyDown(keybinds.Aim()) && aiming && resetAimingToggle)
             {
                 aiming = false;
                 resetAimingToggle = false;
@@ -152,13 +151,13 @@ public class GunController : MonoBehaviour
         }
         else
         {
-            if (Input.GetKey(aim))
+            if (Input.GetKey(keybinds.Aim()))
             {
                 aiming = true;
                 aimHandler();
             }
 
-            if (Input.GetKeyUp(aim))
+            if (Input.GetKeyUp(keybinds.Aim()))
             {
                 aiming = false;
                 resetAim();
@@ -170,7 +169,7 @@ public class GunController : MonoBehaviour
     {
         if (canAuto && auto)
         {
-            if (Input.GetKey(shoot) && readyToShoot && auto)
+            if (Input.GetKey(keybinds.Shoot()) && readyToShoot && auto)
             {
                 readyToShoot = false;
                 spawnBullet();
@@ -179,12 +178,12 @@ public class GunController : MonoBehaviour
         }
         else
         {
-            if (Input.GetKeyUp(shoot))
+            if (Input.GetKeyUp(keybinds.Shoot()))
             {
                 resetShoot();
             }
             
-            if (Input.GetKeyDown(shoot) && readyToShoot)
+            if (Input.GetKeyDown(keybinds.Shoot()) && readyToShoot)
             {
                 readyToShoot = false;
                 spawnBullet();

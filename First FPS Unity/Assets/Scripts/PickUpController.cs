@@ -6,10 +6,6 @@ public class PickUpController : MonoBehaviour
 {
     public bool hasObject = false;
 
-    [Header("Keybinds")]
-    public KeyCode drop = KeyCode.G;
-    public KeyCode pickUp = KeyCode.F;
-
     [Header("Objects")]
     public Transform camera;
 
@@ -27,14 +23,23 @@ public class PickUpController : MonoBehaviour
     private Vector3 p1;
     private Vector3 p2;
 
+    private GameObject gameManager;
+    private KeybindsController keybinds;
+
+    private void Start()
+    {
+        gameManager = GameObject.Find("GameManager");
+        keybinds = gameManager.GetComponent<KeybindsController>();
+    }
+
     void Update()
     {
-        if (hasObject && Input.GetKeyDown(drop))
+        if (hasObject && Input.GetKeyDown(keybinds.Drop()))
         {
             Drop();
         }
 
-        if (!hasObject && Input.GetKeyDown(pickUp))
+        if (!hasObject && Input.GetKeyDown(keybinds.PickUp()))
         {
             PickUp();
         }

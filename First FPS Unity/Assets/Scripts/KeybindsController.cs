@@ -4,41 +4,57 @@ using UnityEngine;
 
 public class KeybindsController : MonoBehaviour
 {
+    [Header("Movement Keybinds")]
+    public KeyCode jump = KeyCode.Space;
+
+    [Header("Fire Keybinds")]
     public KeyCode shoot = KeyCode.Mouse0;
     public KeyCode aim = KeyCode.Mouse1;
-    public KeyCode pickUp = KeyCode.F;
-    public KeyCode drop = KeyCode.G;
     public KeyCode reload = KeyCode.R;
     public KeyCode toggleFire = KeyCode.V;
-    
-    private KeyCode [] fireKeys = new KeyCode [];
-    private KeyCode [] itemInteractions = new KeyCode [];
-    
-    void Start()
+    public bool aimToggle = false;
+    [Header("Item Keybinds")]
+    public KeyCode pickUp = KeyCode.F;
+    public KeyCode drop = KeyCode.G;
+
+    public KeyCode Jump()
     {
-        // gun control keys
-        fireKeys.add(shoot);
-        fireKeys.add(aim);
-        fireKeys.add(reload);
-        fireKeys.add(toggleFire);
-        
-        // item interation keys
-        itemInteractions.add(pickUp);
-        itemInteractions.add(drop);
+        return jump;
     }
-    
-    void Update()
+
+    public KeyCode Shoot()
     {
-        
+        return shoot;
     }
-    
-    public KeyCode [] FireKeys()
+
+    public KeyCode Reload()
     {
-        return fireKeys;
+        return reload;
     }
-    
-    public KeyCode [] ItemInterations()
+
+    public KeyCode Aim()
     {
-        return itemInteractions;
+        return aim;
     }
+
+    public KeyCode ToggleFire()
+    {
+        return toggleFire;
+    }
+
+    public bool AimToggle()
+    {
+        return aimToggle;
+    }
+
+    public KeyCode PickUp()
+    {
+        return pickUp;
+    }
+
+    public KeyCode Drop()
+    {
+        return drop;
+    }
+
 }
