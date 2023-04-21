@@ -45,8 +45,6 @@ public class GunController : MonoBehaviour
     public float reloadZoom = 5.0f;
     public float defaultAimZoom = 1.5f;
     public float chargeOpenTime;
-    public float hammerDelay;
-    public float slideDelay;
     public float horizontalAimAdjust;
     public float verticalAimAdjust;
     public float zAimAdjust;
@@ -60,6 +58,7 @@ public class GunController : MonoBehaviour
     private int animLayer = 0;
     private GameObject hand;
     private GameObject camera;
+    private GameObject playerUI;
     private PlayerCam cameraScript;
     private Animator anim;
 
@@ -68,15 +67,23 @@ public class GunController : MonoBehaviour
 
     private void Awake()
     {
+        // Grabbing gameManager + keybinds
         gameManager = GameObject.Find("GameManager");
         keybinds = gameManager.GetComponent<KeybindsController>();
+
+        // Grabbing hand object + setting default pos
         hand = GameObject.Find("RightHand");
+        defaultPos = hand.transform.localPosition;
+
+        // Grabbing playerCam script from playerCam
         camera = GameObject.Find("PlayerCam");
         cameraScript = camera.GetComponent <PlayerCam> ();
+
+        // Grabbing playerUI
+        playerUI = GameObject.Find("PlayerUI");
+
+        // Grabbing animator
         anim = gun.GetComponent<Animator>();
-        anim.SetFloat("hammerDelay", hammerDelay);
-        anim.SetFloat("slideDelay", slideDelay);
-        defaultPos = hand.transform.localPosition;
     }
 
     private void Update()
@@ -87,6 +94,8 @@ public class GunController : MonoBehaviour
             {
                 auto = !auto;
             }
+
+            UIUpdater();
 
             if (Input.GetKeyDown(keybinds.Reload()))
             {
@@ -188,6 +197,18 @@ public class GunController : MonoBehaviour
                 readyToShoot = false;
                 spawnBullet();
             }
+        }
+    }
+
+    private void UIUpdater()
+    {
+        if (aiming)
+        {
+            playerUI.GetComponent<Image>().enabled = false;
+        }
+        else if (!aiming)
+        {
+
         }
     }
 
