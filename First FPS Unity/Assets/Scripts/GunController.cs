@@ -204,11 +204,11 @@ public class GunController : MonoBehaviour
     {
         if (aiming)
         {
-            playerUI.GetComponent<Image>().enabled = false;
+            playerUI.transform.GetChild(0).GameObject().SetActive(false);
         }
         else if (!aiming)
         {
-
+            playerUI.transform.GetChild(0).GameObject().SetActive(true);
         }
     }
 
@@ -243,9 +243,13 @@ public class GunController : MonoBehaviour
         float randomUD = Random.Range(lowerRandUD, upperRandUD);
         var casing = Instantiate(casingPrefab, casingSpawn.position, casingSpawn.rotation);
         casing.GetComponent<Rigidbody>().velocity = casingSpawn.up * ejectVelocity;
+
+        // adding directional torque
         casing.GetComponent<Rigidbody>().AddTorque(transform.right * randomLR);
         casing.GetComponent<Rigidbody>().AddTorque(transform.up * randomUD);
         casing.GetComponent<Rigidbody>().AddTorque(transform.forward * randomFB);
+
+        // add recoil
         cameraScript.addRecoil(verticalRecoil, horizontalRecoil);
     }
 
