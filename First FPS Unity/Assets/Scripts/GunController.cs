@@ -1,7 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using TMPro;
 
 public class GunController : MonoBehaviour
 {
@@ -20,8 +20,8 @@ public class GunController : MonoBehaviour
     public float ejectVelocity;
     public float verticalRecoil;
     public float horizontalRecoil;
-    public float verticalSway;
-    public float horizontalSway;
+    public float verticalSwayT;
+    public float horizontalSwayT;
     public float verticalInaccuracy;
     public float horizontalInaccuracy;
     public float reloadTime;
@@ -40,13 +40,15 @@ public class GunController : MonoBehaviour
     public Transform bulletSpawn;
     public Transform casingSpawn;
 
+    [Header("UI Elements")]
+    public TMP_Text ammoDisplay;
+
     [Header("Adjustments")]
     public float defaultFOV;
-    public float reloadZoom = 5.0f;
     public float defaultAimZoom = 1.5f;
     public float chargeOpenTime;
-    public float horizontalAimAdjust;
-    public float verticalAimAdjust;
+    public float xAimAdjust;
+    public float yAimAdjust;
     public float zAimAdjust;
     public float lowerRandFB;
     public float lowerRandLR;
@@ -54,8 +56,10 @@ public class GunController : MonoBehaviour
     public float upperRandFB;
     public float upperRandLR;
     public float upperRandUD;
+    public float aimTime = 5;
 
     private int animLayer = 0;
+    private float aimT = 0;
     private GameObject hand;
     private GameObject camera;
     private GameObject playerUI;
@@ -88,29 +92,25 @@ public class GunController : MonoBehaviour
 
     private void Update()
     {
-        if (equipped)
+        if (equipped) // only run if object is equipped
         {
-            if (Input.GetKeyDown(keybinds.ToggleFire()))
+            if (Input.GetKeyDown(keybinds.ToggleFire())) // toggle fire mode
             {
                 auto = !auto;
             }
 
             UIUpdater();
 
-            if (Input.GetKeyDown(keybinds.Reload()))
+            if (Input.GetKeyDown(keybinds.Reload())) // start reload
             {
                 startReload();
             }
 
             aimController();
 
-            if (!reloading)
+            if (!reloading) // don't fire while reloading
             {
                 fireHandler();
-            }
-            else if (reloading && Input.GetKey(keybinds.Shoot())) // when reload anim added, swith to coroutine to wait before setting ammo, then stop coroutine
-            {
-
             }
         }
     }
@@ -119,24 +119,32 @@ public class GunController : MonoBehaviour
     {
         if (!reloading)
         {
-            hand.transform.localPosition = new UnityEngine.Vector3(0 - horizontalAimAdjust, 0 - verticalAimAdjust, defaultPos.z - zAimAdjust);
+            hand.transform.localPosition = new UnityEngine.Vector3(Mathf.Lerp(defaultPos.x, defaultPos.x - xAimAdjust, aimT), Mathf.Lerp(defaultPos.y, defaultPos.y - yAimAdjust, aimT), Mathf.Lerp(defaultPos.z, defaultPos.z - zAimAdjust, aimT));
+
+            if (aimT <= 1)
+            {
+                aimT += aimTime * Time.deltaTime;
+            }
+
             if (hasScope)
             {
-                cameraScript.setFOV(defaultFOV / zoomMult);
+                cameraScript.setFOV(Mathf.Lerp(defaultFOV, defaultFOV / zoomMult, aimT));
             }
             else
             {
-                cameraScript.setFOV(defaultFOV / defaultAimZoom);
+                cameraScript.setFOV(Mathf.Lerp(defaultFOV, defaultFOV / defaultAimZoom, aimT));
             }
-        }
-        else
-        {
-            cameraScript.setFOV(defaultFOV / reloadZoom);
         }
     }
 
     private void aimController()
     {
+
+        if (Input.GetKeyUp(keybinds.Aim()))
+        {
+            aimT = 0;
+        }
+
         if (aimToggle)
         {
             if (Input.GetKeyUp(keybinds.Aim()) && !resetAimingToggle)
@@ -202,6 +210,8 @@ public class GunController : MonoBehaviour
 
     private void UIUpdater()
     {
+        ammoDisplay.text = ammo.ToString() + " / " + maxAmmo.ToString();
+
         if (aiming)
         {
             playerUI.transform.GetChild(0).GameObject().SetActive(false);

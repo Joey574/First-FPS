@@ -51,10 +51,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e27ec1aba4f804207b73e7b034498723, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shoot: 323
-  aim: 324
-  toggleFire: 118
-  reload: 114
   fireRate: 60
   bulletSpeed: 150
   maxAmmo: 15
@@ -62,8 +58,8 @@ MonoBehaviour:
   ejectVelocity: 2.5
   verticalRecoil: 1
   horizontalRecoil: 0.5
-  verticalSway: 0
-  horizontalSway: 0
+  verticalSwayT: 0
+  horizontalSwayT: 0
   verticalInaccuracy: 0
   horizontalInaccuracy: 0
   reloadTime: 1.5
@@ -78,20 +74,18 @@ MonoBehaviour:
   bulletSpawn: {fileID: 8003693850756789454}
   casingSpawn: {fileID: 8003693850379035099}
   defaultFOV: 60
-  reloadZoom: 3
   defaultAimZoom: 1.5
   chargeOpenTime: 0.16
-  hammerDelay: 0.08
-  slideDelay: 0.08
-  horizontalAimAdjust: 0
-  verticalAimAdjust: 0.15
-  zAimAdjust: 0.1
+  xAimAdjust: 0.45
+  yAimAdjust: -0.05
+  zAimAdjust: 0.22
   lowerRandFB: 1
   lowerRandLR: 4
   lowerRandUD: 2
   upperRandFB: 5
   upperRandLR: 8
   upperRandUD: 4
+  aimTime: 10
 --- !u!114 &5002340957606547500
 MonoBehaviour:
   m_ObjectHideFlags: 0
