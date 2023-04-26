@@ -1,6 +1,7 @@
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class GunController : MonoBehaviour
@@ -20,8 +21,6 @@ public class GunController : MonoBehaviour
     public float ejectVelocity;
     public float verticalRecoil;
     public float horizontalRecoil;
-    public float verticalSwayT;
-    public float horizontalSwayT;
     public float verticalInaccuracy;
     public float horizontalInaccuracy;
     public float reloadTime;
@@ -41,6 +40,7 @@ public class GunController : MonoBehaviour
     public Transform casingSpawn;
 
     [Header("UI Elements")]
+    public Image crosshair;
     public TMP_Text ammoDisplay;
 
     [Header("Adjustments")]
@@ -57,13 +57,15 @@ public class GunController : MonoBehaviour
     public float upperRandLR;
     public float upperRandUD;
     public float aimTime = 5;
+    public float vSway;
+    public float hSway;
 
     private int animLayer = 0;
     private float aimT = 0;
     private GameObject hand;
     private GameObject camera;
-    private GameObject playerUI;
     private PlayerCam cameraScript;
+    private handMovement handScript;
     private Animator anim;
 
     private GameObject gameManager;
@@ -83,17 +85,20 @@ public class GunController : MonoBehaviour
         camera = GameObject.Find("PlayerCam");
         cameraScript = camera.GetComponent <PlayerCam> ();
 
-        // Grabbing playerUI
-        playerUI = GameObject.Find("PlayerUI");
-
         // Grabbing animator
         anim = gun.GetComponent<Animator>();
+
+        // Grab handMovement script
+        handScript = hand.GetComponent<handMovement>();
     }
 
     private void Update()
     {
         if (equipped) // only run if object is equipped
         {
+            handScript.setHSway(hSway);
+            handScript.setVSway(vSway);
+
             if (Input.GetKeyDown(keybinds.ToggleFire())) // toggle fire mode
             {
                 auto = !auto;
@@ -214,11 +219,11 @@ public class GunController : MonoBehaviour
 
         if (aiming)
         {
-            playerUI.transform.GetChild(0).GameObject().SetActive(false);
+            crosshair.enabled = false;
         }
         else if (!aiming)
         {
-            playerUI.transform.GetChild(0).GameObject().SetActive(true);
+            crosshair.enabled = true;
         }
     }
 

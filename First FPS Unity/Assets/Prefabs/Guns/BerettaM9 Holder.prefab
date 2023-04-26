@@ -58,8 +58,6 @@ MonoBehaviour:
   ejectVelocity: 2.5
   verticalRecoil: 1
   horizontalRecoil: 0.5
-  verticalSwayT: 0
-  horizontalSwayT: 0
   verticalInaccuracy: 0
   horizontalInaccuracy: 0
   reloadTime: 1.5
@@ -73,6 +71,8 @@ MonoBehaviour:
   casingPrefab: {fileID: 6607513805091876755, guid: 5a9825458a6460e40bf0073c80c68f61, type: 3}
   bulletSpawn: {fileID: 8003693850756789454}
   casingSpawn: {fileID: 8003693850379035099}
+  crosshair: {fileID: 0}
+  ammoDisplay: {fileID: 0}
   defaultFOV: 60
   defaultAimZoom: 1.5
   chargeOpenTime: 0.16
@@ -86,6 +86,8 @@ MonoBehaviour:
   upperRandLR: 8
   upperRandUD: 4
   aimTime: 10
+  vSway: 1
+  hSway: 1
 --- !u!114 &5002340957606547500
 MonoBehaviour:
   m_ObjectHideFlags: 0

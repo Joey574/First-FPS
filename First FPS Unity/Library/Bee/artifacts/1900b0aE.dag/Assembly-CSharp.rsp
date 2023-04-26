@@ -351,6 +351,7 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
 "Assets/Scripts/BulletCasingDespawn.cs"
 "Assets/Scripts/GunController.cs"
+"Assets/Scripts/handMovement.cs"
 "Assets/Scripts/KeybindsController.cs"
 "Assets/Scripts/PickUpController.cs"
 "Assets/Scripts/PlayerCam.cs"
