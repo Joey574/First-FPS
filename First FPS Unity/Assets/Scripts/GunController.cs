@@ -11,7 +11,6 @@ public class GunController : MonoBehaviour
     private bool reloading = false;
     private bool auto = true;
     private bool aiming = false;
-    private bool resetAimingToggle = false;
 
     [Header("Gun Data")]
     public float fireRate;
@@ -64,7 +63,7 @@ public class GunController : MonoBehaviour
     private GameObject hand;
     private GameObject camera;
     private PlayerCam cameraScript;
-    private handMovement handScript;
+    private GunSwayController gunSway;
     private Animator anim;
 
     private GameObject gameManager;
@@ -88,15 +87,15 @@ public class GunController : MonoBehaviour
         anim = gun.GetComponent<Animator>();
 
         // Grab handMovement script
-        handScript = hand.GetComponent<handMovement>();
+        gunSway = GameObject.Find("GunSway").GetComponent<GunSwayController>();
     }
 
     private void Update()
     {
         if (equipped) // only run if object is equipped
         {
-            handScript.setHSway(hSway);
-            handScript.setVSway(vSway);
+            gunSway.setHSway(hSway);
+            gunSway.setVSway(vSway);
 
             if (Input.GetKeyDown(keybinds.ToggleFire()) && canAuto) // toggle fire mode
             {
