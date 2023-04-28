@@ -28,7 +28,6 @@ public class GunController : MonoBehaviour
     public float zoomMult;
     public bool hasScope;
     public bool canAuto;
-    public bool aimToggle;
 
     private bool equipped;
 
@@ -99,7 +98,7 @@ public class GunController : MonoBehaviour
             handScript.setHSway(hSway);
             handScript.setVSway(vSway);
 
-            if (Input.GetKeyDown(keybinds.ToggleFire())) // toggle fire mode
+            if (Input.GetKeyDown(keybinds.ToggleFire()) && canAuto) // toggle fire mode
             {
                 auto = !auto;
             }
@@ -111,7 +110,7 @@ public class GunController : MonoBehaviour
                 startReload();
             }
 
-            aimController();
+            aimController(); // handles aiming
 
             if (!reloading) // don't fire while reloading
             {
@@ -120,74 +119,46 @@ public class GunController : MonoBehaviour
         }
     }
     
-    private void aimHandler()
+    private void aimHandler() // handles aim zoom
     {
         if (!reloading)
         {
             hand.transform.localPosition = new UnityEngine.Vector3(Mathf.Lerp(defaultPos.x, defaultPos.x - xAimAdjust, aimT), Mathf.Lerp(defaultPos.y, defaultPos.y - yAimAdjust, aimT), Mathf.Lerp(defaultPos.z, defaultPos.z - zAimAdjust, aimT));
 
-            if (aimT <= 1)
+            if (aimT < 1) // clamp aimT to 1
             {
                 aimT += aimTime * Time.deltaTime;
             }
 
-            if (hasScope)
+            if (hasScope) // talk to scope for zoomMult
             {
                 cameraScript.setFOV(Mathf.Lerp(defaultFOV, defaultFOV / zoomMult, aimT));
             }
-            else
+            else // default zoom mult
             {
                 cameraScript.setFOV(Mathf.Lerp(defaultFOV, defaultFOV / defaultAimZoom, aimT));
             }
         }
     }
 
-    private void aimController()
+    private void aimController() // handles when to aim and when to reset pos of objects
     {
 
-        if (Input.GetKeyUp(keybinds.Aim()))
+        if (Input.GetKeyUp(keybinds.Aim())) // reset aimT
         {
             aimT = 0;
+            aiming = false;
+            resetAim();
         }
 
-        if (aimToggle)
+        if (Input.GetKey(keybinds.Aim()))
         {
-            if (Input.GetKeyUp(keybinds.Aim()) && !resetAimingToggle)
-            {
-                resetAimingToggle = true;
-            }
-
-            if (Input.GetKeyDown(keybinds.Aim()) && !aiming && resetAimingToggle)
-            {
-                aiming = true;
-                resetAimingToggle = false;
-                aimHandler();
-            }
-
-            if (Input.GetKeyDown(keybinds.Aim()) && aiming && resetAimingToggle)
-            {
-                aiming = false;
-                resetAimingToggle = false;
-                resetAim();
-            }
-        }
-        else
-        {
-            if (Input.GetKey(keybinds.Aim()))
-            {
-                aiming = true;
-                aimHandler();
-            }
-
-            if (Input.GetKeyUp(keybinds.Aim()))
-            {
-                aiming = false;
-                resetAim();
-            }
+            aiming = true;
+            aimHandler();
         }
     }
 
-    private void fireHandler()
+    private void fireHandler() // handles shooting
     {
         if (canAuto && auto)
         {
@@ -213,7 +184,7 @@ public class GunController : MonoBehaviour
         }
     }
 
-    private void UIUpdater()
+    private void UIUpdater() // update UI
     {
         ammoDisplay.text = ammo.ToString() + " / " + maxAmmo.ToString();
 
@@ -227,7 +198,7 @@ public class GunController : MonoBehaviour
         }
     }
 
-    private void spawnBullet()
+    private void spawnBullet() // spawn bullet + add velocity
     {
         if (ammo > 0) {
             ammo--;
@@ -251,7 +222,7 @@ public class GunController : MonoBehaviour
         }
     }
 
-    private void spawnCasing()
+    private void spawnCasing() // spawn casing + add torque
     {
         float randomLR = Random.Range(lowerRandLR, upperRandLR);
         float randomFB = Random.Range(lowerRandFB, upperRandFB);
@@ -270,17 +241,17 @@ public class GunController : MonoBehaviour
 
     private void resetShoot()
     {
-        StartCoroutine(WaitForKickBackAnimation());
+        readyToShoot = true;
     }
 
-    private void startReload()
+    private void startReload() // initiate reload
     {
         reloading = true;
         hand.transform.localPosition = defaultPos;
         Invoke(nameof(setAmmoToMax), reloadTime);
     }
 
-    private void setAmmoToMax()
+    private void setAmmoToMax() // set ammo to max + play close action if empty
     {
         if (ammo == 0)
         {
@@ -301,16 +272,7 @@ public class GunController : MonoBehaviour
         hand.transform.localPosition = defaultPos;
     }
 
-    private IEnumerator WaitForKickBackAnimation()
-    {
-        while(!anim.GetCurrentAnimatorStateInfo(animLayer).IsTag("Idle"))
-        {
-            yield return null;
-        }
-        readyToShoot = true;
-    }
-
-    private IEnumerator WaitForCloseActionAnimation()
+    private IEnumerator WaitForCloseActionAnimation() // wait for close action on reload if needed
     {
         while (anim.GetCurrentAnimatorStateInfo(animLayer).IsName("closeAction"))
         {
