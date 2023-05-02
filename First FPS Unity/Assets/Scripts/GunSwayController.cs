@@ -4,35 +4,41 @@ using UnityEngine;
 
 public class GunSwayController : MonoBehaviour
 {
-    public Transform playerCam;
+    public Transform PlayerCam;
+    public Transform PlayerObj;
 
-    private float horizontalSway;
-    private float verticalSway;
+    [Header("Adjustments")]
+    public float horizontalTime = 0;
+    public float verticalTime = 0;
 
-    private float horizontalSwayT;
-    private float verticalSwayT;
+    public float xRotTolerance = 0.02f;
+    public float yRotTolerance = 0.02f;
+
+    private float xRot;
+    private float yRot;
+
+    private float hSway = 0;
+    private float vSway = 0;
 
     void Update()
     {
-        horizontalSwayT += horizontalSway * Time.deltaTime;
-        verticalSwayT += verticalSway * Time.deltaTime;
+        xRot = Mathf.Lerp(transform.localRotation.x, PlayerCam.localRotation.x, horizontalTime);
+        yRot = Mathf.Lerp(transform.localRotation.y, PlayerObj.localRotation.y, verticalTime);
 
-        transform.rotation = UnityEngine.Quaternion.Euler(Mathf.LerpUnclamped(playerCam.rotation.x, transform.rotation.x, horizontalSwayT), Mathf.LerpUnclamped(playerCam.rotation.y, transform.rotation.y, verticalSwayT), playerCam.rotation.z);
+        transform.localRotation = UnityEngine.Quaternion.Euler(xRot, yRot, 0);
+
+        horizontalTime += hSway * Time.deltaTime;
+        verticalTime += vSway * Time.deltaTime;
     }
 
-    private void resetTime()
+    public void setVSway(float verticalSway)
     {
-        horizontalSwayT = 0;
-        verticalSwayT = 0;
+        vSway = verticalSway;
     }
 
-    public void setHSway(float s)
+    public void setHSway(float horizontalSway)
     {
-        horizontalSway = s;
+        hSway = horizontalSway;
     }
 
-    public void setVSway(float s)
-    {
-        verticalSway = s;
-    }
 }
