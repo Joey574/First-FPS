@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class UniversalItemHandler : MonoBehaviour
 {
-    public string handName;
     public Rigidbody rb;
 
     [Header("Item Type")]
@@ -16,7 +15,7 @@ public class UniversalItemHandler : MonoBehaviour
 
     void Start()
     {
-        hand = GameObject.Find(handName);
+        hand = GameObject.Find("RightHand");
 
         if (gun)
         {

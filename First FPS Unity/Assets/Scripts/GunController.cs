@@ -37,10 +37,6 @@ public class GunController : MonoBehaviour
     public Transform bulletSpawn;
     public Transform casingSpawn;
 
-    [Header("UI Elements")]
-    public Image crosshair;
-    public TMP_Text ammoDisplay;
-
     [Header("Adjustments")]
     public float defaultFOV;
     public float defaultAimZoom = 1.5f;
@@ -69,18 +65,26 @@ public class GunController : MonoBehaviour
     private GameObject gameManager;
     private KeybindsController keybinds;
 
+    // UI Elements
+    private Image crosshair;
+    private TMP_Text ammoDisplay;
+
     private void Awake()
     {
         // Grabbing gameManager + keybinds
         gameManager = GameObject.Find("GameManager");
         keybinds = gameManager.GetComponent<KeybindsController>();
 
+        // Grabbing UI Elements
+        crosshair = GameObject.Find("Crosshair");
+        ammoDisplay = GameObject.Find("AmmoDisplay");
+
         // Grabbing hand object + setting default pos
         hand = GameObject.Find("RightHand");
         defaultPos = hand.transform.localPosition;
 
         // Grabbing playerCam script from playerCam
-        camera = GameObject.Find("PlayerCam");
+        camera = Image.Find("PlayerCam");
         cameraScript = camera.GetComponent <PlayerCam> ();
 
         // Grabbing animator
