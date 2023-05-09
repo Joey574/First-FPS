@@ -66,6 +66,10 @@ public class GunController : MonoBehaviour
     private KeybindsController keybinds;
 
     // UI Elements
+    private GameObject UI;
+    private GameObject crosshairObject;
+    private GameObject ammoDisplayObject;
+
     private Image crosshair;
     private TMP_Text ammoDisplay;
 
@@ -76,15 +80,18 @@ public class GunController : MonoBehaviour
         keybinds = gameManager.GetComponent<KeybindsController>();
 
         // Grabbing UI Elements
-        crosshair = GameObject.Find("Crosshair");
-        ammoDisplay = GameObject.Find("AmmoDisplay");
+        UI = GameObject.Find("PlayerUI");
+        crosshairObject = GameObject.Find("Crosshair");
+        crosshair = crosshairObject.GetComponent<Image>();
+        ammoDisplayObject = GameObject.Find("AmmoDisplay");
+        ammoDisplay = ammoDisplayObject.GetComponent<TMP_Text>();
 
         // Grabbing hand object + setting default pos
         hand = GameObject.Find("RightHand");
         defaultPos = hand.transform.localPosition;
 
         // Grabbing playerCam script from playerCam
-        camera = Image.Find("PlayerCam");
+        camera = GameObject.Find("PlayerCam");
         cameraScript = camera.GetComponent <PlayerCam> ();
 
         // Grabbing animator

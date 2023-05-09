@@ -657,7 +657,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 622901651}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CasingSpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -671,14 +671,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 622901650}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0582, y: 0.3174, z: -0.084}
+  m_LocalRotation: {x: 0, y: 0, z: -0.6427876, w: 0.7660445}
+  m_LocalPosition: {x: 0.06899999, y: 0.31739998, z: -0.08399999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2074300851}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -80}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -920,7 +920,7 @@ GameObject:
   - component: {fileID: 836712481}
   - component: {fileID: 836712482}
   - component: {fileID: 836712480}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -940,7 +940,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 179726091}
-  - {fileID: 1045638516}
   - {fileID: 1402144978}
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -1011,6 +1010,26 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 33269b2b610f4c245a712795c1927939, type: 3}
   m_PrefabInstance: {fileID: 1077215803}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &913791425
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 913791419}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &954891412
 GameObject:
   m_ObjectHideFlags: 0
@@ -1156,6 +1175,7 @@ GameObject:
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
   - component: {fileID: 963194229}
+  - component: {fileID: 963194230}
   m_Layer: 3
   m_Name: PlayerCam
   m_TagString: MainCamera
@@ -1227,6 +1247,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 186983831}
+  - {fileID: 1045638516}
   m_Father: {fileID: 179726091}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1248,6 +1269,22 @@ MonoBehaviour:
   horizontalRecoil: 0
   orientation: {fileID: 1402144978}
   player: {fileID: 179726091}
+--- !u!54 &963194230
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  serializedVersion: 2
+  m_Mass: 0.1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1045638515
 GameObject:
   m_ObjectHideFlags: 0
@@ -1258,7 +1295,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1045638516}
   - component: {fileID: 1045638517}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: GunSway
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1273,12 +1310,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1045638515}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.5, z: -0.10699999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 959421897}
-  m_Father: {fileID: 836712479}
+  m_Father: {fileID: 963194228}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1045638517
@@ -1294,11 +1331,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerCam: {fileID: 963194228}
+  cameraRigidBody: {fileID: 963194230}
   PlayerObj: {fileID: 179726091}
+  playerRigidBody: {fileID: 0}
   horizontalTime: 0
   verticalTime: 0
-  xRotTolerance: 0.02
-  yRotTolerance: 0.02
+  xRot: 0
+  yRot: 0
+  hSway: 0
+  vSway: 0
+  hSwayAdjust: 0
+  vSwayAdjust: 0
+  hasRun: 0
 --- !u!1001 &1077215803
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1357,6 +1401,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 33269b2b610f4c245a712795c1927939, type: 3}
       propertyPath: m_Name
       value: assault1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 33269b2b610f4c245a712795c1927939, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 33269b2b610f4c245a712795c1927939, type: 3}
@@ -1466,7 +1514,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1402144978}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Orientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1486,7 +1534,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 836712479}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1623321342
 GameObject:
@@ -1749,7 +1797,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2002366430}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BulletSpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1861,9 +1909,9 @@ GameObject:
   - component: {fileID: 2074300848}
   - component: {fileID: 2074300847}
   - component: {fileID: 2074300846}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AK-47 Holder
-  m_TagString: Untagged
+  m_TagString: Gun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1937,16 +1985,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e27ec1aba4f804207b73e7b034498723, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireRate: 60
-  bulletSpeed: 200
+  fireRate: 600
+  bulletSpeed: 275
   maxAmmo: 30
   ammo: 30
-  ejectVelocity: 2
+  ejectVelocity: 3
   verticalRecoil: 2
   horizontalRecoil: 1
   verticalInaccuracy: 0
   horizontalInaccuracy: 0
-  reloadTime: 10
+  reloadTime: 3
   volume: 0
   zoomMult: 0
   hasScope: 0
@@ -1956,11 +2004,9 @@ MonoBehaviour:
   casingPrefab: {fileID: 7802473267145322698, guid: b216caf5fb8d06b4895b2861f23ef8c0, type: 3}
   bulletSpawn: {fileID: 2002366430}
   casingSpawn: {fileID: 622901651}
-  crosshair: {fileID: 2005048038}
-  ammoDisplay: {fileID: 814642942}
   defaultFOV: 60
   defaultAimZoom: 1.5
-  chargeOpenTime: 5
+  chargeOpenTime: 0.1
   xAimAdjust: 0
   yAimAdjust: 0
   zAimAdjust: 0
