@@ -22,6 +22,8 @@ public class GunController : MonoBehaviour
     public float horizontalRecoil;
     public float verticalInaccuracy;
     public float horizontalInaccuracy;
+    public float vSway;
+    public float hSway;
     public float reloadTime;
     public float volume;
     public float zoomMult;
@@ -51,8 +53,6 @@ public class GunController : MonoBehaviour
     public float upperRandLR;
     public float upperRandUD;
     public float aimTime = 5;
-    public float vSway;
-    public float hSway;
 
     private int animLayer = 0;
     private float aimT = 0;

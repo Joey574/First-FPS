@@ -4,71 +4,40 @@ using UnityEngine;
 
 public class GunSwayController : MonoBehaviour
 {
-    public Transform PlayerCam;
-    public Rigidbody cameraRigidBody;
-    public Transform PlayerObj;
-    public Rigidbody playerRigidBody;
 
     [Header("Adjustments")]
-    public float horizontalTime = 0;
-    public float verticalTime = 0;
+    public float hSwayMultiplier;
+    public float vSwayMultiplier;
+    public float smooth;
 
-    public float xRot;
-    public float yRot;
-
-    public float hSway = 0;
-    public float vSway = 0;
-
-    public float hSwayAdjust;
-    public float vSwayAdjust;
-
-    public bool hasRun = false;
-
-    void Update()
+    private void Update()
     {
-        Debug.Log(cameraRigidBody.angularVelocity.magnitude);
+        float mouseX = Input.GetAxisRaw("Mouse X") * hSwayMultiplier;
+        float mouseY = Input.GetAxisRaw("Mouse Y") * vSwayMultiplier;
 
-        if (cameraRigidBody.angularVelocity.magnitude != 0 || playerRigidBody.angularVelocity.magnitude != 0)
-        {
-            if (hasRun == false)
-            {
-                hasRun = true;
-                hSwayAdjust = transform.parent.rotation.x - transform.rotation.x;
-                vSwayAdjust = transform.parent.rotation.y - transform.rotation.y;
-                horizontalTime = 1;
-                verticalTime = 1;
-            }
-        }
+        Quaternion rotationX = Quaternion.AngleAxis(-mouseY, Vector3.right);
+        Quaternion rotationY = Quaternion.AngleAxis(mouseX, Vector3.up);
 
-        if (horizontalTime > 0)
-        {
-            horizontalTime -= hSway * Time.deltaTime;
-        }
-        if (verticalTime > 0)
-        {
-            verticalTime -= vSway * Time.deltaTime;
-        }
+        Quaternion targetRotation = rotationX * rotationY;
 
-        if (verticalTime <= 0 && horizontalTime <= 0)
-        {
-            hasRun = false;
-        }
-
-        xRot = Mathf.Lerp(transform.localRotation.x + hSwayAdjust, 0, horizontalTime);
-        yRot = Mathf.Lerp(transform.localRotation.y + vSwayAdjust, 0, verticalTime);
-
-        transform.localRotation = UnityEngine.Quaternion.Euler(xRot, yRot, 0);
-
+        transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRotation, smooth * Time.deltaTime);
     }
 
-    public void setVSway(float verticalSway)
+    public void setSmooth(float s)
     {
-        vSway = verticalSway;
+        smooth = s;
     }
 
-    public void setHSway(float horizontalSway)
+    public void setHSway(float h)
     {
-        hSway = horizontalSway;
+        hSwayMultiplier = h;
+    }
+
+    public void setVSway(float v)
+    {
+        vSwayMultiplier = v;
     }
 
 }
+
+
