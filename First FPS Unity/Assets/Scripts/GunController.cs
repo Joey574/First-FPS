@@ -1,8 +1,5 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 
 public class GunController : MonoBehaviour
 {
@@ -70,21 +67,11 @@ public class GunController : MonoBehaviour
     private GameObject crosshairObject;
     private GameObject ammoDisplayObject;
 
-    private Image crosshair;
-    private TMP_Text ammoDisplay;
-
     private void Awake()
     {
         // Grabbing gameManager + keybinds
         gameManager = GameObject.Find("GameManager");
         keybinds = gameManager.GetComponent<KeybindsController>();
-
-        // Grabbing UI Elements
-        UI = GameObject.Find("PlayerUI");
-        crosshairObject = GameObject.Find("Crosshair");
-        crosshair = crosshairObject.GetComponent<Image>();
-        ammoDisplayObject = GameObject.Find("AmmoDisplay");
-        ammoDisplay = ammoDisplayObject.GetComponent<TMP_Text>();
 
         // Grabbing hand object + setting default pos
         hand = GameObject.Find("RightHand");
@@ -98,7 +85,7 @@ public class GunController : MonoBehaviour
         anim = gun.GetComponent<Animator>();
 
         // Grab handMovement script
-        gunSway = GameObject.Find("GunSway").GetComponent<GunSwayController>();
+        gunSway = hand.GetComponent<GunSwayController>();
     }
 
     private void Update()
@@ -112,8 +99,6 @@ public class GunController : MonoBehaviour
             {
                 auto = !auto;
             }
-
-            UIUpdater();
 
             if (Input.GetKeyDown(keybinds.Reload())) // start reload
             {
@@ -194,20 +179,6 @@ public class GunController : MonoBehaviour
         }
     }
 
-    private void UIUpdater() // update UI
-    {
-        ammoDisplay.text = ammo.ToString() + " / " + maxAmmo.ToString();
-
-        if (aiming)
-        {
-            crosshair.enabled = false;
-        }
-        else if (!aiming)
-        {
-            crosshair.enabled = true;
-        }
-    }
-
     private void spawnBullet() // spawn bullet + add velocity
     {
         if (ammo > 0) {
@@ -271,12 +242,12 @@ public class GunController : MonoBehaviour
         StartCoroutine(WaitForCloseActionAnimation());
     }
 
-    public void setEquipped(bool equipped)
+    public void setEquipped(bool equipped) // set equipped to true
     {
         this.equipped = equipped;
     }
 
-    private void resetAim()
+    private void resetAim() // reset aim and move hand back to default pos
     {
         cameraScript.setFOV(defaultFOV);
         hand.transform.localPosition = defaultPos;
@@ -298,5 +269,15 @@ public class GunController : MonoBehaviour
         {
             aimHandler();
         }
+    }
+
+    public int getAmmo()
+    {
+        return ammo;
+    }
+
+    public bool getAiming()
+    {
+        return aiming;
     }
 }

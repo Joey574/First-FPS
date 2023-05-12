@@ -65,6 +65,11 @@ public class PickUpController : MonoBehaviour
                hasObject = true;
         }
     }
+
+    public bool getHasObject()
+    {
+        return hasObject;
+    }
 }
 
 

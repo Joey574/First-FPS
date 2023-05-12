@@ -358,6 +358,7 @@
 "Assets/Scripts/PickUpController.cs"
 "Assets/Scripts/PlayerCam.cs"
 "Assets/Scripts/PlayerMovement.cs"
+"Assets/Scripts/UIController.cs"
 "Assets/Scripts/UniversalItemHandler.cs"
 "Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark01.cs"
 "Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark01_UGUI.cs"
