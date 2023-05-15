@@ -280,4 +280,9 @@ public class GunController : MonoBehaviour
     {
         return aiming;
     }
+
+    public int getMaxAmmo()
+    {
+        return maxAmmo;
+    }
 }

@@ -29,8 +29,6 @@ public class UIController : MonoBehaviour
         ammo = ammoObject.GetComponent<TMP_Text>();
 
         pickUp = player.GetComponent<PickUpController>();
-
-
     }
 
     void Update()
@@ -41,7 +39,7 @@ public class UIController : MonoBehaviour
 
             crosshairControl();
 
-            ammo.SetText(activeGun.getAmmo().ToString());
+            ammo.SetText(activeGun.getAmmo().ToString() + "/" + activeGun.getMaxAmmo().ToString());
         }
         else
         {
